@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+      <h1>Survey Form</h1>
+    <div class="form-container">
+
+      <form action="#" method="post">
+        <p>Let us know how we can improve freeCodeCamp</p>
+        <table>
+          <tr class="formRow">
+            <th><label for="name">* Name:</label></th>
+            <td><input type="text" id="name" name="name" placeholder="Enter your name" /></td>
+          </tr>
+
+          <tr class="formRow">
+            <th><label for="email">* Email:</label></th>
+            <td><input type="email" id="email" name="email" placeholder="Enter your Email" /></td>
+          </tr>
+
+          <tr class="formRow">
+            <th><label for="age">* Age:</label></th>
+            <td><input type="number" id="age" name="age" placeholder="Age" /></td>
+          </tr>
+
+          <tr class="formRow">
+            <th><label for="role">Which option best describes your current role?</label></th>
+            <td>
+              <select id="role" name="role">
+                <option value="student">Student</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr class="formRow">
+            <th>How likely is that you would recommend freeCodeCamp to a friend?</th>
+            <td>
+              <div class="choiceGroup">
+                <div>
+                  <input type="radio" id="definitely" name="recommend" value="definitely" />
+                  <label for="definitely">Definitely</label>
+                </div>
+                <div>
+                  <input type="radio" id="maybe" name="recommend" value="maybe" />
+                  <label for="maybe">Maybe</label>
+                </div>
+                <div>
+                  <input type="radio" id="notsure" name="recommend" value="notsure" />
+                  <label for="notsure">Not sure</label>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr class="formRow">
+            <th><label for="like">What do you like most in FCC?</label></th>
+            <td>
+              <select id="like" name="like">
+                <option>Select an option</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr class="formRow">
+            <th>Things that should be improved in the future (Check all that apply):</th>
+            <td>
+              <div class="choiceGroup">
+                <div>
+                  <input type="checkbox" id="frontend" name="improve[]" value="frontend" />
+                  <label for="frontend">Front-end Projects</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="backend" name="improve[]" value="backend" />
+                  <label for="backend">Back-end Projects</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="data" name="improve[]" value="data" />
+                  <label for="data">Data Visualization</label>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+    body {
+      font-family: Roboto;
+      background-color: #a9d7d1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    select {
+      height: 30px;
+    }
+
+    .choiceGroup {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    th {
+      text-align: right;
+      padding-right: 10px;
+    }
+
+    td {
+      width: 30%;
+    }
+  </style>
+</html>

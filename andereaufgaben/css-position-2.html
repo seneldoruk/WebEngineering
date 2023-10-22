@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Übung 2.2</title>
+    <style>
+      .container {
+        padding: 20px;
+        position: relative;
+      }
+
+      .wrapper {
+        border: 1px black solid;
+        padding: 10px;
+      }
+
+      #toggle:not(:checked) ~ .wrapper .content {
+        opacity: 0;
+      }
+      img {
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Übung 2.2</h1>
+
+      <input type="checkbox" id="toggle" checked />
+      <label for="toggle">hide and show via checkbox</label>
+
+      <div class="wrapper">
+        <div class="content">
+          <img
+            class="content"
+            src="https://kaul.inf.h-brs.de/ccm/we/ws23/resources/assets/h-brs.jpg"
+          />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
