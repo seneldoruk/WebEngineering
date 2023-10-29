@@ -2,19 +2,36 @@
 <html>
   <body>
     <h1>Übungen</h1>
-    <ul>
-        <li><a href="uebung1.html">Übung 1</a></li>
-        <li><a href="uebung2.html">Übung 2</a></li>
-    </ul>
+    <div class="container">
+      <a href="uebung1.html">Übung 1</a>
+      <a href="uebung2.html">Übung 2</a>
+      <a href="uebung3.html">Übung 3</a>
+    </div>
   </body>
   <style>
-    li{
-      padding: 5px;
-      width: 20%;
-      text-align: center;
-      border: 3px solid black;
-      margin: 15px;
-      border-radius: 5px;
-    }
+      .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+      }
+      a {
+        background-color: #ec933f;
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+      }
+      a:hover {
+        background-color: #ec933f;
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        opacity: 0.8;
+      }
+
+    <style>
   </style>
 </html>
