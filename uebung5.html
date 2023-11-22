@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+  <head>
+    <style>
+      #rednerInput {
+        margin-bottom: 10px;
+      }
+      #rednerList {
+        list-style-type: none;
+        padding: 0;
+      }
+      #rednerList li {
+        margin: 5px 0;
+        padding: 5px;
+        background-color: #f0f0f0;
+        border: 1px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Rednerliste</h2>
+
+    <input type="text" id="rednerInput" placeholder="Neuer Redner" />
+    <button id="addButton">Hinzufügen</button>
+
+    <ul id="rednerList"></ul>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        let timers = {};
+        let activeTimer = null;
+
+        const addSpeaker = (name) => {
+          if (!name.trim()) return;
+
+          if (activeTimer) {
+            clearInterval(timers[activeTimer].intervalId);
+            activeTimer = null;
+          }
+
+          const listItem = document.createElement("li");
+          listItem.textContent = name + " 00:00:00";
+          listItem.id = name;
+          document.getElementById("speakersList").appendChild(listItem);
+
+          timers[name] = {
+            time: 0,
+            intervalId: setInterval(() => {
+              timers[name].time++;
+              const seconds = timers[name].time % 60;
+              const minutes = Math.floor(timers[name].time / 60) % 60;
+              const hours = Math.floor(timers[name].time / 3600);
+              listItem.textContent = `${name} ${hours
+                .toString()
+                .padStart(2, "0")}:${minutes
+                .toString()
+                .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+            }, 1000),
+          };
+
+          activeTimer = name;
+        };
+
+        document.getElementById("addButton").addEventListener("click", () => {
+          const speakerName = document.getElementById("speakerInput").value;
+          addSpeaker(speakerName);
+          document.getElementById("speakerInput").value = "";
+        });
+
+        document
+          .getElementById("speakerInput")
+          .addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+              const speakerName = e.target.value;
+              addSpeaker(speakerName);
+              e.target.value = "";
+            }
+          });
+      });
+    </script>
+  </body>
+</html>
