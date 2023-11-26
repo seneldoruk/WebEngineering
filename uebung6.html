@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <textarea id="inputArea" rows="6" cols="30">
+schlafen, studieren
+essen, studieren
+studieren, prüfen
+    </textarea>
+    <br />
+    <button onclick="testVorrang()">Test Starten</button>
+  </body>
+  <script>
+    class Vorrang {
+      constructor(vorrangRelationen) {
+        this.adjList = new Map();
+        this.indegree = new Map();
+
+        vorrangRelationen.forEach(([u, v]) => {
+          if (!this.adjList.has(u)) this.adjList.set(u, []);
+          if (!this.adjList.has(v)) this.adjList.set(v, []);
+          if (!this.indegree.has(u)) this.indegree.set(u, 0);
+          if (!this.indegree.has(v)) this.indegree.set(v, 0);
+
+          this.adjList.get(u).push(v);
+          this.indegree.set(v, this.indegree.get(v) + 1);
+        });
+
+        this.queue = [];
+        this.indegree.forEach((deg, node) => {
+          if (deg === 0) this.queue.push(node);
+        });
+
+        this.current = this.queue.shift();
+      }
+
+      [Symbol.iterator]() {
+        return {
+          next: () => {
+            if (this.current === undefined) {
+              return { done: true };
+            } else {
+              const result = { value: this.current, done: false };
+
+              this.adjList.get(this.current).forEach((node) => {
+                this.indegree.set(node, this.indegree.get(node) - 1);
+                if (this.indegree.get(node) === 0) {
+                  this.queue.push(node);
+                }
+              });
+
+              this.current = this.queue.shift();
+              return result;
+            }
+          },
+        };
+      }
+    }
+    function parseInput(input) {
+      return input
+        .trim()
+        .split("\n")
+        .map((line) => line.split(",").map((item) => item.trim()));
+    }
+
+    function testVorrang() {
+      const input = document.getElementById("inputArea").value;
+      const vorrangRelationen = parseInput(input);
+      const studentenLeben = new Vorrang(vorrangRelationen);
+
+      const ergebnisse = [];
+      for (const next of studentenLeben) {
+        ergebnisse.push(next);
+      }
+
+      console.log("Sorted:", ergebnisse);
+    }
+
+    const studentenLeben = new Vorrang([
+      ["schlafen", "studieren"],
+      ["essen", "studieren"],
+      ["studieren", "prüfen"],
+    ]);
+
+    var arr = [];
+    for (const next of studentenLeben) {
+      arr.push(next);
+    }
+    console.assert(
+      arr.toString() === ["schlafen", "essen", "studieren", "prüfen"].toString()
+    );
+  </script>
+</html>

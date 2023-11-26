@@ -1,0 +1,118 @@
+body {
+  margin: 0;
+  background-color: #0096c7;
+  font-family: "Roboto", sans-serif;
+}
+h1 {
+  margin-bottom: 0;
+}
+h5 {
+  margin-top: 0;
+}
+hr {
+  border: 0;
+  height: 1px;
+  background: #333;
+  background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+#entrypoint {
+  margin: 0.5em;
+  border-radius: 0.5em;
+  background-color: #caf0f8;
+  padding: 0 3em 3em;
+  font-size: 19px;
+  overflow-x: auto;
+  width: 90%;
+}
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+ul.horizontal {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #03045e;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+ul.horizontal li {
+  float: left;
+}
+
+ul.horizontal li a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+ul.horizontal li a:hover:not(.active),
+ul.horizontal li a.active,
+a.demo:hover {
+  background-color: #00b4d8;
+}
+
+ul.horizontal2 {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #e7e7e7;
+  background-color: #f3f3f3;
+}
+
+ul.horizontal2 li {
+  float: left;
+}
+
+ul.horizontal2 li a {
+  display: inline-block;
+  color: #666;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul.horizontal2 li a:hover:not(.active) {
+  background-color: #ddd;
+}
+
+ul.horizontal2 a.active {
+  color: white;
+  background-color: #04aa6d;
+}
+.header {
+  padding: 1px;
+  text-align: center;
+  background: #023e8a;
+  color: #caf0f8;
+  font-size: 30px;
+}
+a.demo {
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: #ffffff;
+  background-color: #023e8a;
+  text-align: center;
+  transition: all 0.2s;
+}
+p.question {
+  display: flex;
+  justify-content: space-between;
+  align-content: flex-start;
+  align-items: center;
+}
