@@ -10,6 +10,9 @@ h1 {
 h5 {
   margin-top: 0;
 }
+a {
+  transition: all 0.5s;
+}
 
 /* Quelle für hr: https://gist.github.com/40/3745743 */
 hr {
@@ -27,6 +30,8 @@ hr {
   font-size: 19px;
   overflow-x: auto;
   width: 90%;
+  min-height: 100vh;
+  transition: opacity 1s ease-in-out 0s;
 }
 .container {
   width: 100%;
@@ -43,6 +48,7 @@ ul.horizontal {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
+  z-index: 1;
 }
 
 ul.horizontal li {
@@ -73,6 +79,7 @@ a.demo:hover {
   font-size: 30px;
 }
 a.demo {
+  min-width: 220px;
   display: inline-block;
   padding: 0.3em 1.2em;
   margin: 0 0.3em 0.3em 0;

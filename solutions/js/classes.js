@@ -23,10 +23,12 @@ class KalenderWoche {
         }
     })()
 
-    renderSelf(element) {
+    async renderSelf(element) {
         KalenderWoche.changeSelectedElement(element)
         const entrypoint = document.querySelector('#entrypoint');
         entrypoint.innerHTML = '';
+        entrypoint.style.opacity = '0';
+        await new Promise(resolve => setTimeout(resolve, 499));
         this.qaArray.forEach((item, index) => {
             const div = document.createElement('div');
             const question = document.createElement('p');
@@ -47,7 +49,8 @@ class KalenderWoche {
 
             const answer = document.createElement('textarea');
             answer.textContent = item.a;
-            answer.setAttribute('rows', item.a.split('\n').length);
+            const row = Math.max(5, item.a.split('\n').length)
+            answer.setAttribute('rows', row);
             answer.style = "width: 100%";
             answer.setAttribute('disabled', true);
             div.appendChild(answer);
@@ -59,5 +62,7 @@ class KalenderWoche {
 
             entrypoint.appendChild(div);
         });
+        entrypoint.style.opacity = '1';
+
     }
 }

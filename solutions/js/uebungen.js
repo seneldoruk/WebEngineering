@@ -911,8 +911,7 @@ const kw46 = parseAsKW("KW 46",
   <script>
   const testElement = document.createElement('div');
   document.body.appendChild(testElement);
-  testElement.innerHTML = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
-  
+  testElement.innerHTML = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'  
   
   
   function measurePerformance(method) {
@@ -1099,3 +1098,215 @@ const kw46 = parseAsKW("KW 46",
 kwArr.push(kw46)
 
 
+// const kw47 = parseAsKW("KW 47",
+
+// )
+// kwArr.push(kw47)
+
+const kw48 = parseAsKW("KW 48", [
+  {
+    q: `Schreiben Sie eine Funktion curry (von Currying), die eine binäre Funktion und ein Argument nimmt, um daraus eine Funktion zu erzeugen, die ein zweites Argument entgegennimmt. Beispiele: add3 = curry(add, 3); add3(4) ergibt 7 und curry(mul, 5)(6) ergibt 30. Erzeugen Sie die inc-Funktion mithilfe von addf oder applyf (aus Aufgabe 4.1) und curry, ohne die Funktion inc selbst zu implementieren. inc(x) soll immer x + 1 zurückgeben und lässt sich natürlich auch direkt implementieren. Das ist aber hier nicht die Aufgabe. Vielleicht schaffen Sie es, drei Varianten der inc-Implementierung zu schreiben? Schreiben Sie eine Funktion methodize, die eine binäre Funktion (z.B. add oder mul) in eine unäre Methode verwandelt. Nach Number.prototype.add = methodize(add) soll (3).add(4) genau 7 ergeben. Schreiben Sie eine Funktion demethodize, die eine unäre Methode (z.B. add oder mul) in eine binäre Funktion umwandelt. demethodize(Number.prototype.add)(5, 6) soll 11 ergeben. Schreiben Sie eine Funktion twice, die eine binäre Funktion in eine unäre Funktion umwandelt, die den einen Parameter zweimal weiter reicht. Also z.B. var double = twice(add); double(11) soll 22 ergeben und var square = twice(mul); square(11) soll mul(11,11) === 121 ergeben. Schreiben Sie eine Funktion composeu, die zwei unäre Funktionen in eine einzelne unäre Funktion transformiert, die beide nacheinander aufruft. Also z.B. soll composeu(double, square)(3) genau 36 ergeben. Schreiben Sie eine Funktion composeb, die zwei binäre Funktionen in eine einzelne Funktion transformiert, die beide nacheinander aufruft. Also z.B. composeb(add, mul)(2, 3, 5) soll 25 ergeben. Schreiben Sie eine Funktion once, die einer anderen Funktion nur einmal erlaubt, aufgerufen zu werden. Also z.B. add_once = once(add); add_once(3, 4) soll beim ersten Mal 7 ergeben, beim zweiten Mal soll jedoch add_once(3, 4) einen Fehlerabbruch bewirken. Schreiben Sie eine Fabrik-Funktion counterf, die zwei Funktionen inc und dec berechnet, die einen Zähler hoch- und herunterzählen. Also z.B. counter = counterf(10). Dann soll counter.inc() genau 11 und counter.dec() wieder 10 ergeben. Schreiben Sie eine rücknehmbare Funktion revocable, die als Parameter eine Funktion nimmt und diese bei Aufruf ausführt. Sobald die Funktion aber mit revoke() zurückgenommen wurde, führt ein erneuter Aufruf zu einem Fehler. Also z.B.: temp = revocable(alert); temp.invoke(7); // führt zu alert(7); temp.revoke(); temp.invoke(8); // Fehlerabbruch! Schreiben Sie ein "Array Wrapper"-Objekt mit den Methoden get, store und append, sodass ein Angreifer keinen Zugriff auf das innere, private Array hat. Also z.B.: my_vector = vector(); my_vector.append(7); my_vector.store(1, 8); my_vector.get(0); // 7 my_vector.get(1); // 8`,
+    a:
+      `
+  //Q1
+  function curry(binaryFunc, firstArg) {
+      return function (secondArg) {
+          return binaryFunc(firstArg, secondArg);
+      };
+  }
+  var add = (x, y) => x + y;
+  var mul = (x, y) => x * y;
+  const add3 = curry(add, 3);
+  
+  console.assert(add3(4), 7)
+  console.assert(curry(mul, 5)(6), 30)
+  
+  //Q2
+  function addf(x) {
+      return function (y) {
+          return x + y;
+      };
+  }
+  
+  // 1
+  let inc = curry(addf(1), 1);
+  console.assert(inc(1), 2)
+  
+  // 2
+  inc = addf(1);
+  console.assert(inc(2), 3)
+  
+  // 3
+  inc = function (x) {
+      return addf(x)(1);
+  };
+  console.assert(inc(3), 4)
+  
+  //Q3
+  function methodize(binaryFunc) {
+      return function (y) {
+          return binaryFunc(this, y);
+      };
+  }
+  
+  Number.prototype.add = methodize(function (a, b) { return a + b; });
+  console.assert((3).add(4) === 7);
+  
+  
+  //Q4
+  function demethodize(method) {
+      return function (x, y) {
+          return method.call(x, y);
+      };
+  }
+  
+  Number.prototype.add = methodize(function (a, b) { return a + b; });
+  const demethodizedAdd = demethodize(Number.prototype.add);
+  console.assert(demethodizedAdd(5, 6) === 11);
+  
+  //Q5
+  function twice(binaryFunc) {
+      return function (x) {
+          return binaryFunc(x, x);
+      };
+  }
+  
+  var double = twice(function (a, b) { return a + b; });
+  console.assert(double(11) === 22);
+  
+  var square = twice(function (a, b) { return a * b; });
+  console.assert(square(11) === 121);
+  
+  
+  //Q6
+  function composeu(func1, func2) {
+      return function (x) {
+          return func2(func1(x));
+      };
+  }
+  
+  double = function (x) { return x * 2; };
+  square = function (x) { return x * x; };
+  const doubleThenSquare = composeu(double, square);
+  console.assert(doubleThenSquare(3) === 36);
+  
+  //Q7
+  function composeb(func1, func2) {
+      return function (x, y, z) {
+          return func2(func1(x, y), z);
+      };
+  }
+  
+  add = function (a, b) { return a + b; };
+  mul = function (a, b) { return a * b; };
+  const addThenMul = composeb(add, mul);
+  console.assert(addThenMul(2, 3, 5) === 25);
+  
+  //Q8
+  function once(func) {
+      let executed = false;
+      return function () {
+          if (!executed) {
+              executed = true;
+              return func.apply(this, arguments);
+          } else {
+              throw new Error();
+          }
+      };
+  }
+  
+  const addOnce = once(function (a, b) { return a + b; });
+  console.assert(addOnce(3, 4) === 7);
+  try {
+      addOnce(3, 4);
+      console.assert(false, 'Once failed second time');
+  } catch (e) {
+      console.assert(true);
+  }
+  
+  
+  //Q9
+  function counterf(x) {
+      return {
+          inc: function () { return ++x; },
+          dec: function () { return --x; }
+      };
+  }
+  
+  const counter = counterf(10);
+  console.assert(counter.inc() === 11, 'Counter inc failed');
+  console.assert(counter.dec() === 10, 'Counter dec failed');
+  
+  //Q10
+  function revocable(func) {
+      let revoked = false;
+      return {
+          invoke: function () {
+              if (!revoked) {
+                  return func.apply(this, arguments);
+              } else {
+                  throw new Error("Function has been revoked.");
+              }
+          },
+          revoke: function () {
+              revoked = true;
+          }
+      };
+  }
+  
+  function testAlert(message) {
+      console.log("Alert called with message:", message);
+      return message;
+  }
+  const temp = revocable(testAlert);
+  temp.invoke(7);
+  temp.revoke();
+  try {
+      temp.invoke(8);
+      console.assert(false);
+  } catch (e) {
+      console.assert(true);
+  }
+  
+  //Q11
+  function vector() {
+      let array = [];
+      return {
+          get: function (i) { return array[i]; },
+          store: function (i, v) { array[i] = v; },
+          append: function (v) { array.push(v); }
+      };
+  }
+  
+  const my_vector = vector();
+  my_vector.append(7);
+  my_vector.store(1, 8);
+  console.assert(my_vector.get(0) === 7);
+  console.assert(my_vector.get(1) === 8);
+    `
+  },
+  {
+    q: "Schreiben Sie in JavaScript eine Textanalyse. Ermitteln Sie die häufigsten Begriffe im Text Plagiatsresolution. Filtern Sie dabei alle Stoppworte und HTML-Tags. Reduzieren Sie das Ergebnis auf die 3 häufigsten Begriffe. Hinweis: Eine größere Stoppwort-Liste finden Sie auch unter github.com/stopwords-iso/stopwords-de.",
+    a:
+      `
+  const text = \`Plagiatsresolution und -maßnahmen Resolution zum akademischen Ethos und zu den akademischen Standards In guter Tradition und anlässlich der öffentlichen Diskussion zum Plagiatsthema sieht sich die Hochschule Bonn-Rhein-Sieg in der Pflicht, ihre Position klar und eindeutig zu bekunden und hochschulweit Maßnahmen einzuleiten. 1. Die Hochschule Bonn-Rhein-Sieg bekennt sich mit dieser Resolution öffentlich zum akademischen Ethos und den akademischen Standards. 2. Die Hochschule Bonn-Rhein-Sieg sieht sich verpflichtet, alle Studierende frühzeitig im Studium sowohl über den wissenschaftlichen Auftrag und den akademischen Ethos als auch über die Konsequenzen seiner Missachtung aufzuklären. In allen Studiengängen wird intensiv in die wissenschaftliche Arbeits- und Denkweise eingeführt und über den akademischen Ethos und die akademischen Standards klar und eindeutig aufgeklärt. 3. In einer Selbstverpflichtungserklärung zum akademischen Ethos geben alle Studierende der Hochschule Bonn-Rhein-Sieg spätestens gegen Ende des ersten Studienjahres zum Ausdruck, dass sie sich von den Dozentinnen und Dozenten der Hochschule Bonn-Rhein-Sieg hinreichend über den akademischen Ethos und die akademischen Standards aufgeklärt sind und diese beachten werden. Der Senat befürwortete in seiner Sitzung am 03.05.2012 die Resolution in der o.g. Fassung. Eckpunkte zur Plagiatsprüfung Der Senat empfiehlt: 1. Die Aufklärung und das Bekenntnis zum akademischen Ethos und den akademischen Standards muss fester Bestandteil aller Curricula aller Studiengänge im ersten Studienjahr sein. Alle Curricula aller Studiengänge werden darauf hin geprüft und ggfs. ergänzt. 2. Alle Abschlussarbeiten werden auf Plagiate geprüft. 3. Alle Abschlussarbeiten mit Plagiaten werden grundsätzlich als Fehlversuch gewertet. 4. Die Entscheidung, ob die Arbeit Plagiate enthält, liegt zuerst bei den Gutachterinnen und Gutachtern. Der Nachweis in einem Gutachten reicht. 5. Alle Abschlussarbeiten werden grundsätzlich auch in elektronischer Form (PDF-Format und Originalformat wie Word, OpenOffice, ...) eingereicht. 6. Alle Abschlussarbeiten ohne Sperrvermerk werden einem vom Fachbereich definierten Kreis zur Einsicht zur Verfügung gestellt. Alle Abschlussarbeiten sollten nach Möglichkeit grundsätzlich zur Veröffentlichung freigegeben werden. Wissenschaft zielt auf Veröffentlichung ab. Nichtveröffentlichung sollte nur in begründeten und durch den Prüfungsausschuss genehmigten Ausnahmefällen geschehen. 7. Im Bereich von Seminar-, Hausarbeiten und Praktikumsberichten behält sich die Hochschule stichprobenartige Plagiatsprüfungen vor. Selbstverpflichtungserklärung der Studierenden: Eine akademische Arbeit stellt eine individuelle Leistung dar, die eigenständig und allein auf Basis der im Literaturverzeichnis angegebenen Quellen erstellt wurde und in der alle Zitate als solche gekennzeichnet sind. "Ich erkläre hiermit, dass ich den akademischen Ehrencodex kenne und über die Folgen einer Missachtung oder Verletzung aufgeklärt worden bin."\`;
+  const stop = ["a", "ab", "aber", "ach", "acht", "achte", "achten", "achter", "achtes", "ag", "alle", "allein", "allem", "allen", "aller", "allerdings", "alles", "allgemeinen", "als", "also", "am", "an", "ander", "andere", "anderem", "anderen", "anderer", "anderes", "anderm", "andern", "anderr", "anders", "au", "auch", "auf", "aus", "ausser", "ausserdem", "außer", "außerdem", "b", "bald", "bei", "beide", "beiden", "beim", "beispiel", "bekannt", "bereits", "besonders", "besser", "besten", "bin", "bis", "bisher", "bist", "c", "d", "d.h", "da", "dabei", "dadurch", "dafür", "dagegen", "daher", "dahin", "dahinter", "damals", "damit", "danach", "daneben", "dank", "dann", "daran", "darauf", "daraus", "darf", "darfst", "darin", "darum", "darunter", "darüber", "das", "dasein", "daselbst", "dass", "dasselbe", "davon", "davor", "dazu", "dazwischen", "daß", "dein", "deine", "deinem", "deinen", "deiner", "deines", "dem", "dementsprechend", "demgegenüber", "demgemäss", "demgemäß", "demselben", "demzufolge", "den", "denen", "denn", "denselben", "der", "deren", "derer", "derjenige", "derjenigen", "dermassen", "dermaßen", "derselbe", "derselben", "des", "deshalb", "desselben", "dessen", "deswegen", "dich", "die", "diejenige", "diejenigen", "dies", "diese", "dieselbe", "dieselben", "diesem", "diesen", "dieser", "dieses", "dir", "doch", "dort", "drei", "drin", "dritte", "dritten", "dritter", "drittes", "du", "durch", "durchaus", "durfte", "durften", "dürfen", "dürft", "e", "eben", "ebenso", "ehrlich", "ei", "ei,", "eigen", "eigene", "eigenen", "eigener", "eigenes", "ein", "einander", "eine", "einem", "einen", "einer", "eines", "einig", "einige", "einigem", "einigen", "einiger", "einiges", "einmal", "eins", "elf", "en", "ende", "endlich", "entweder", "er", "ernst", "erst", "erste", "ersten", "erster", "erstes", "es", "etwa", "etwas", "euch", "euer", "eure", "eurem", "euren", "eurer", "eures", "f", "folgende", "früher", "fünf", "fünfte", "fünften", "fünfter", "fünftes", "für", "g", "gab", "ganz", "ganze", "ganzen", "ganzer", "ganzes", "gar", "gedurft", "gegen", "gegenüber", "gehabt", "gehen", "geht", "gekannt", "gekonnt", "gemacht", "gemocht", "gemusst", "genug", "gerade", "gern", "gesagt", "geschweige", "gewesen", "gewollt", "geworden", "gibt", "ging", "gleich", "gott", "gross", "grosse", "grossen", "grosser", "grosses", "groß", "große", "großen", "großer", "großes", "gut", "gute", "guter", "gutes", "h", "hab", "habe", "haben", "habt", "hast", "hat", "hatte", "hatten", "hattest", "hattet", "heisst", "her", "heute", "hier", "hin", "hinter", "hoch", "hätte", "hätten", "i", "ich", "ihm", "ihn", "ihnen", "ihr", "ihre", "ihrem", "ihren", "ihrer", "ihres", "im", "immer", "in", "indem", "infolgedessen", "ins", "irgend", "ist", "j", "ja", "jahr", "jahre", "jahren", "je", "jede", "jedem", "jeden", "jeder", "jedermann", "jedermanns", "jedes", "jedoch", "jemand", "jemandem", "jemanden", "jene", "jenem", "jenen", "jener", "jenes", "jetzt", "k", "kam", "kann", "kannst", "kaum", "kein", "keine", "keinem", "keinen", "keiner", "keines", "kleine", "kleinen", "kleiner", "kleines", "kommen", "kommt", "konnte", "konnten", "kurz", "können", "könnt", "könnte", "l", "lang", "lange", "leicht", "leide", "lieber", "los", "m", "machen", "macht", "machte", "mag", "magst", "mahn", "mal", "man", "manche", "manchem", "manchen", "mancher", "manches", "mann", "mehr", "mein", "meine", "meinem", "meinen", "meiner", "meines", "mensch", "menschen", "mich", "mir", "mit", "mittel", "mochte", "mochten", "morgen", "muss", "musst", "musste", "mussten", "muß", "mußt", "möchte", "mögen", "möglich", "mögt", "müssen", "müsst", "müßt", "n", "na", "nach", "nachdem", "nahm", "natürlich", "neben", "nein", "neue", "neuen", "neun", "neunte", "neunten", "neunter", "neuntes", "nicht", "nichts", "nie", "niemand", "niemandem", "niemanden", "noch", "nun", "nur", "o", "ob", "oben", "oder", "offen", "oft", "ohne", "ordnung", "p", "q", "r", "recht", "rechte", "rechten", "rechter", "rechtes", "richtig", "rund", "s", "sa", "sache", "sagt", "sagte", "sah", "satt", "schlecht", "schluss", "schon", "sechs", "sechste", "sechsten", "sechster", "sechstes", "sehr", "sei", "seid", "seien", "sein", "seine", "seinem", "seinen", "seiner", "seines", "seit", "seitdem", "selbst", "sich", "sie", "sieben", "siebente", "siebenten", "siebenter", "siebentes", "sind", "so", "solang", "solche", "solchem", "solchen", "solcher", "solches", "soll", "sollen", "sollst", "sollt", "sollte", "sollten", "sondern", "sonst", "soweit", "sowie", "später", "startseite", "statt", "steht", "suche", "t", "tag", "tage", "tagen", "tat", "teil", "tel", "tritt", "trotzdem", "tun", "u", "uhr", "um", "und", "uns", "unse", "unsem", "unsen", "unser", "unsere", "unserer", "unses", "unter", "v", "vergangenen", "viel", "viele", "vielem", "vielen", "vielleicht", "vier", "vierte", "vierten", "vierter", "viertes", "vom", "von", "vor", "w", "wahr", "wann", "war", "waren", "warst", "wart", "warum", "was", "weg", "wegen", "weil", "weit", "weiter", "weitere", "weiteren", "weiteres", "welche", "welchem", "welchen", "welcher", "welches", "wem", "wen", "wenig", "wenige", "weniger", "weniges", "wenigstens", "wenn", "wer", "werde", "werden", "werdet", "weshalb", "wessen", "wie", "wieder", "wieso", "will", "willst", "wir", "wird", "wirklich", "wirst", "wissen", "wo", "woher", "wohin", "wohl", "wollen", "wollt", "wollte", "wollten", "worden", "wurde", "wurden", "während", "währenddem", "währenddessen", "wäre", "würde", "würden", "x", "y", "z", "z.b", "zehn", "zehnte", "zehnten", "zehnter", "zehntes", "zeit", "zu", "zuerst", "zugleich", "zum", "zunächst", "zur", "zurück", "zusammen", "zwanzig", "zwar", "zwei", "zweite", "zweiten", "zweiter", "zweites", "zwischen", "zwölf", "über", "überhaupt", "übrigens"];
+  
+  const words = text.split(' ')
+      .map(word => word.toLowerCase())
+      .filter(word => word && !stop.includes(word) && word.length > 1)
+      .reduce((freq, word) => {
+          freq[word] = (freq[word] || 0) + 1;
+          return freq;
+      }, {});
+  
+  console.log(
+      Object.entries(words)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 3)
+          .map(entry => entry[0])
+  )
+    `
+  }
+])
+kwArr.push(kw48)
