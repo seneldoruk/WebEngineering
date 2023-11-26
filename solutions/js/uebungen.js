@@ -237,7 +237,7 @@ const kw42 = parseAsKW("KW 42",
     },
     {
       "q": "Bauen Sie das dynamische Verhalten in den folgenden beiden Videos exakt nach:\n\n- [Video 1 Link](https://www.youtube.com/watch?v=PE3POxjDspo)\n- [Video 2 Link](https://www.youtube.com/watch?v=HVmnv3k4__E)\n\nArbeiten Sie in beiden Fällen nur mit HTML und CSS, ohne JavaScript.\n\nDas Bild aus dem zweiten Video finden Sie hier.",
-      "a": "Meine Lösung zum 1. Video:\n\n<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n<style>\nbody {\npadding: 50px;\n}\nh2 {\npadding: 10px;\nborder: 1px solid black;\nbackground-color: rgba(255, 255, 255, 0.8);\nposition: sticky;\ntop: 0;\nz-index: 10;\n}\np {\nbackground-color: rgba(239, 239, 240);\n}\n</style>\n</head>\n<body>\n<h2>Erste Überschrift</h2>\n<p>\nLorem ipsum dolor sit amet...\n</p>\n<h2>Zweite Überschrift</h2>\n<p>\nLorem ipsum dolor sit amet...\n</p>\n<h2>Dritte Überschrift</h2>\n<p>\nLorem ipsum dolor sit amet...\n</p>\n</body>\n</html>\n\nMeine Lösung zum 2. Video:\n\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<title>Übung 2.2</title>\n<style>\n.container {\npadding: 20px;\nposition: relative;\n}\n\n.wrapper {\nborder: 1px black solid;\npadding: 10px;\n}\n\n#toggle:not(:checked) ~ .wrapper .content {\nopacity: 0;\n}\nimg {\nmax-width: 100%;\n}\n</style>\n</head>\n<body>\n<div class=\"container\">\n<h1>Übung 2.2</h1>\n\n<input type=\"checkbox\" id=\"toggle\" checked />\n<label for=\"toggle\">hide and show via checkbox</label>\n\n<div class=\"wrapper\">\n<div class=\"content\">\n<img\n class=\"content\"\n src=\"https://kaul.inf.h-brs.de/ccm/we/ws23/resources/assets/h-brs.jpg\"\n/>\n</div>\n</div>\n</div>\n</body>\n</html>"
+      "a": " zum 1. Video:\n\n<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n<style>\nbody {\npadding: 50px;\n}\nh2 {\npadding: 10px;\nborder: 1px solid black;\nbackground-color: rgba(255, 255, 255, 0.8);\nposition: sticky;\ntop: 0;\nz-index: 10;\n}\np {\nbackground-color: rgba(239, 239, 240);\n}\n</style>\n</head>\n<body>\n<h2>Erste Überschrift</h2>\n<p>\nLorem ipsum dolor sit amet...\n</p>\n<h2>Zweite Überschrift</h2>\n<p>\nLorem ipsum dolor sit amet...\n</p>\n<h2>Dritte Überschrift</h2>\n<p>\nLorem ipsum dolor sit amet...\n</p>\n</body>\n</html>\n\n zum 2. Video:\n\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<title>Übung 2.2</title>\n<style>\n.container {\npadding: 20px;\nposition: relative;\n}\n\n.wrapper {\nborder: 1px black solid;\npadding: 10px;\n}\n\n#toggle:not(:checked) ~ .wrapper .content {\nopacity: 0;\n}\nimg {\nmax-width: 100%;\n}\n</style>\n</head>\n<body>\n<div class=\"container\">\n<h1>Übung 2.2</h1>\n\n<input type=\"checkbox\" id=\"toggle\" checked />\n<label for=\"toggle\">hide and show via checkbox</label>\n\n<div class=\"wrapper\">\n<div class=\"content\">\n<img\n class=\"content\"\n src=\"https://kaul.inf.h-brs.de/ccm/we/ws23/resources/assets/h-brs.jpg\"\n/>\n</div>\n</div>\n</div>\n</body>\n</html>"
     },
     {
       "q": "Gegeben ist folgendes HTML-Wireframe:\n\nWireframe of a Survey form\n\nMit welchem HTML- und CSS-Code kann man dieses Wireframe exakt nachbilden? Schreiben Sie Ihren CSS-Code direkt in die HTML-Datei.\n\nDie grünliche Farbe ist #a9d7d1 und die Hintergrundfarbe vom HTML-Formular ist snow. Die Schriftart ist eine Google Font: Roboto.",
@@ -384,6 +384,310 @@ const kw42 = parseAsKW("KW 42",
   ]
 )
 kwArr.push(kw42)
+
+const kw43 = parseAsKW("KW 43",
+  [
+    {
+      q: `
+Spielen Sie zunächst das Flexbox Froggy-Spiel, um Flexbox zu lernen.
+
+Implementieren Sie dann ausschließlich mit HTML, CSS und Flexbox das folgende Responsive Webdesign nach der Desktop-First-Strategie:
+    `,
+      a: `
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+      }
+      .red {
+        background-color: red;
+      }
+      .green {
+        background-color: green;
+      }
+      .blue {
+        background-color: blue;
+      }
+      .purple {
+        background-color: purple;
+      }
+      @media only screen and (min-width: 600px) {
+        .container {
+          height: 100vh;
+          align-content: space-around;
+          justify-content: space-between;
+        }
+        .red {
+          height: 30%;
+          width: 100%;
+        }
+        .green {
+          height: 60%;
+          width: 20%;
+        }
+        .blue {
+          height: 60%;
+          width: 55%;
+        }
+        .purple {
+          height: 60%;
+          width: 20%;
+        }
+      }
+      @media only screen and (max-width: 600px) {
+        .container {
+          height: 130vh;
+          align-content: space-around;
+          justify-content: space-between;
+        }
+        .red,
+        .purple {
+          height: 20%;
+          width: 100%;
+        }
+        .blue {
+          height: 55%;
+          width: 59%;
+        }
+        .green {
+          height: 55%;
+          width: 40%;
+        }
+      }
+      @media only screen and (max-width: 400px) {
+        .container {
+          height: 200vh;
+        }
+        .red,
+        .green,
+        .blue,
+        .purple {
+          height: 30vh;
+          width: 100%;
+        }
+        .blue {
+          height: 60%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="red"></div>
+      <div class="green"></div>
+      <div class="blue"></div>
+      <div class="purple"></div>
+    </div>
+  </body>
+</html>
+    `,
+    },
+    {
+      q: `
+Spielen Sie zunächst das Grid Garden-Spiel, um Grid zu lernen.
+
+Implementieren Sie dann das gleiche Responsive Webdesign wie zuvor in Aufgabe 3.1, allerdings diesmal mit Grid und der Mobile-First-Strategie. Vermeiden Sie außerdem das Erscheinen von horizontalen Scrollbars so weit wie möglich.
+
+:
+    `,
+      a: `
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .container {
+        height: 200vh;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 1fr 1fr 8fr 1fr;
+      }
+      .red {
+        background-color: red;
+      }
+      .green {
+        background-color: green;
+      }
+      .blue {
+        background-color: blue;
+      }
+      .purple {
+        background-color: purple;
+      }
+      @media only screen and (min-width: 600px) {
+        .container {
+          height: 100vh;
+          grid-template-columns: 20% 60% 20%;
+          grid-template-rows: 33% 66%;
+        }
+        div {
+          margin: 5px;
+        }
+        .red {
+          grid-column: span 3;
+        }
+      }
+      @media only screen and (max-width: 600px) and (min-width: 400px) {
+        .container {
+          height: 130vh;
+          grid-template-rows: 15% 70% 15%;
+          grid-template-columns: 33% 66%;
+        }
+        .red {
+          grid-column: span 2;
+        }
+        .purple {
+          grid-column: span 2;
+        }
+        div {
+          margin: 3px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="red"></div>
+      <div class="green"></div>
+      <div class="blue"></div>
+      <div class="purple"></div>
+    </div>
+  </body>
+</html>
+    `,
+    },
+    {
+      q: `
+Implementieren Sie folgende Landing-Page responsiv mit Grid:
+
+Landing Page
+
+Vermeiden Sie auch hier das Erscheinen von horizontalen Scrollbars so weit wie möglich. Für das Bild auf der Landing-Page verwenden Sie bitte diese Bilddatei.
+
+:
+    `,
+      a: `
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .container {
+        display: grid;
+        width: 100%;
+        height: 99vh;
+        grid-template-columns: 100%;
+        grid-template-rows: 5% 80% 15%;
+      }
+      .upperbar {
+        background-color: rgba(54, 54, 54, 255);
+        display: grid;
+        color: rgba(221, 217, 195, 255);
+        grid-template-columns: 35% 15% 15% 35%;
+        grid-template-rows: 100%;
+        padding-top: 1.6%;
+      }
+      .upperbar div {
+        padding-right: 10px;
+        padding-left: 10px;
+        text-wrap: nowrap;
+      }
+      .content {
+        background-color: rgba(235, 234, 230, 255);
+        display: grid;
+        grid-template-columns: 40% 60%;
+        grid-template-rows: 20% 80%;
+      }
+      img {
+        margin-left: 20%;
+        border: black solid;
+        border-radius: 5px;
+      }
+      .rightcontent {
+        margin-top: 10%;
+      }
+      .rightcontent div {
+        margin-top: 30px;
+      }
+      .title {
+        font-weight: bold;
+        font-size: 24px;
+        grid-column: span 2;
+        text-align: center;
+        margin-top: 20px;
+      }
+      .ordercopy {
+        background-color: #ec933f;
+        width: 40%;
+        margin-left: 30%;
+        color: white;
+        border-radius: 5px;
+        padding: 5px;
+      }
+      .bottombar {
+        background-color: rgba(5, 24, 38, 255);
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: 50% 50%;
+        color: rgba(200, 232, 241, 255);
+      }
+      .findoutsection {
+        grid-column: 4/8;
+        grid-row: 2;
+        text-align: center;
+      }
+      .findout {
+        background-color: #ec933f;
+        border-radius: 5px;
+        padding: 3px;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="upperbar">
+        <div style="text-align: end">The book series</div>
+        <div style="text-align: center">Testimonals</div>
+        <div style="text-align: center">The author</div>
+        <div style="text-align: start">Free resources</div>
+      </div>
+      <div class="content">
+        <div class="title">You Dont Know JavaScript</div>
+        <div class="leftcontent">
+          <img
+            src="https://kaul.inf.h-brs.de/ccm/we/ws23/resources/assets/landing-img.png"
+            height="400px"
+            alt=""
+          />
+        </div>
+        <div class="rightcontent" style="text-align: center">
+          <div>Dont just drift through javascript</div>
+          <div>Understand how javascript works</div>
+          <div>Start your journey through the jumpy side of javascript</div>
+          <div class="ordercopy">ORDER YOUR COPY NOW</div>
+        </div>
+      </div>
+      <div class="bottombar">
+        <div class="findoutsection">
+          <div class="firstebook">
+            The first ebook in the book series is absolutely free
+          </div>
+          <div class="findout">FIND OUT MORE ABOUT THIS OFFER</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+    `,
+      demo: 'uebung3.html'
+    },
+  ]
+)
+kwArr.push(kw43)
 
 const navbar = document.querySelector(".horizontal")
 kwArr.forEach((kw) => {
