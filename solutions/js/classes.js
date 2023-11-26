@@ -11,25 +11,21 @@ class KalenderWoche {
         this.title = title;
         this.qaArray = qaArray
     }
-    #changeSelectedElement = (() => {
-        var selectedElement;
-        return function (element) {
-            if (selectedElement) {
-                selectedElement.classList.remove("active")
-            }
-            selectedElement = element
-            selectedElement.classList.add("active")
-        }
-    })()
+    #changeSelectedElement = (element) => {
+        document.querySelectorAll("ul.horizontal li a").forEach(element => {
+            element.classList.remove("active")
+        })
+        element.classList.add("active")
+    }
     renderSelf(element) {
         this.#changeSelectedElement(element)
         const entrypoint = document.querySelector('#entrypoint');
         entrypoint.innerHTML = '';
-        this.qaArray.forEach(item => {
+        this.qaArray.forEach((item, index) => {
             const div = document.createElement('div');
             const question = document.createElement('p');
             question.classList.add('question')
-            question.textContent = item.q;
+            question.textContent = `${index + 1} - ${item.q}`;
 
             if (item.demo) {
                 const demo = document.createElement('a')

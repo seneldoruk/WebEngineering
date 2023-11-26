@@ -1,3 +1,4 @@
+/* Farbpalette: https://coolors.co/palette/03045e-023e8a-0077b6-0096c7-00b4d8-48cae4-90e0ef-ade8f4-caf0f8 */
 body {
   margin: 0;
   background-color: #0096c7;
@@ -9,12 +10,15 @@ h1 {
 h5 {
   margin-top: 0;
 }
+
+/* Quelle für hr: https://gist.github.com/40/3745743 */
 hr {
   border: 0;
   height: 1px;
   background: #333;
   background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
+/* Quelle für #entrypoint: WE-App (mit Anpassungen) */
 #entrypoint {
   margin: 0.5em;
   border-radius: 0.5em;
@@ -29,6 +33,7 @@ hr {
   display: flex;
   justify-content: center;
 }
+/* Quelle für .horizontal: https://www.w3schools.com/css/css_navbar_horizontal.asp (mit Anpassungen) */
 ul.horizontal {
   list-style-type: none;
   margin: 0;
@@ -60,35 +65,6 @@ a.demo:hover {
   background-color: #00b4d8;
 }
 
-ul.horizontal2 {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  border: 1px solid #e7e7e7;
-  background-color: #f3f3f3;
-}
-
-ul.horizontal2 li {
-  float: left;
-}
-
-ul.horizontal2 li a {
-  display: inline-block;
-  color: #666;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-ul.horizontal2 li a:hover:not(.active) {
-  background-color: #ddd;
-}
-
-ul.horizontal2 a.active {
-  color: white;
-  background-color: #04aa6d;
-}
 .header {
   padding: 1px;
   text-align: center;

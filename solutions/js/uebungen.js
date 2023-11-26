@@ -4,7 +4,8 @@ function parseAsKW(title, arr) {
 
   return new KalenderWoche(title, qaObjects);
 }
-const kw41Data = [
+
+const kw41 = parseAsKW("KW 41", [
   {
     q: `
 Mit welchen fachlichen Argumenten wurde das WWW-Proposal von Tim Burners Lee abgelehnt?
@@ -30,7 +31,8 @@ In einer Webanwendung benötigen Sie eine OPTIONS-Anfrage, die die Optionen des 
 301:  URL wurde dauerhaft verschoben.
 400:  ungültig oder falsch 
 403:  Zugriff nicht erlaubt
-Cache-Control header kann benutzt werden`
+Cache-Control header kann benutzt werden
+`
   },
   {
     q: ``,
@@ -62,7 +64,7 @@ Dieser Abschnitt wurde auskommentiert.
 -->
 </body>
 </html>
-        `
+`
   },
   {
     q: `
@@ -71,7 +73,8 @@ Wie kann man eine geschachtelte geordnete Liste der Tiefe 3 erzeugen?
 Wie ist eine HTML-Tabelle aufgebaut?
 Welche Konventionen sollte man bei Pfaden und Dateinamen beachten?
 Wie baut man in HTML ein Menü?
-Welche Attribute sollte man bei Bildern wie verwenden?`,
+Welche Attribute sollte man bei Bildern wie verwenden?
+`,
     a: `
 1- HTML ist die Standardauszeichnungssprache für Web
 2-
@@ -218,11 +221,169 @@ Mit welchem HTML-Code (ohne CSS, nur mit HTML-Tags) kann man dieses Wireframe ex
 `,
     demo: 'uebung1.html'
   }
-]
-
-const kw41 = parseAsKW('KW 41', kw41Data)
+])
 
 kwArr.push(kw41)
+
+const kw42 = parseAsKW("KW 42",
+  [
+    {
+      "q": "Berechnen Sie die Spezifität folgender CSS-Selektoren:\n\n- div div div:focus .inner\n- h1 + div.main\n- div a:link[href*='h-brs']\n- nav > a:hover::before\n- ul#primary-nav li.active",
+      "a": "- 0-2-3\n- 0-1-2\n- 0-2-2\n- 0-1-3\n- 1-1-2"
+    },
+    {
+      "q": "Rechnen Sie folgende RGB-Werte mit den DevTools des Webbrowsers in HSL-Werte um:\n\n- #ffffff\n- #000\n- #ab0978\n- rgb(127,255,33)\n- rgba(255,127,33,0.8)",
+      "a": "- 0deg, 0%, 100% (hex in HSL)\n- 0deg,0%,0% (hex in HSL)\n- 318.89deg, 90%, 35.29%\n- 94.59deg, 100%, 56.47%\n- 25.41deg, 12.94%, 56.47% / 80%"
+    },
+    {
+      "q": "Bauen Sie das dynamische Verhalten in den folgenden beiden Videos exakt nach:\n\n- [Video 1 Link](https://www.youtube.com/watch?v=PE3POxjDspo)\n- [Video 2 Link](https://www.youtube.com/watch?v=HVmnv3k4__E)\n\nArbeiten Sie in beiden Fällen nur mit HTML und CSS, ohne JavaScript.\n\nDas Bild aus dem zweiten Video finden Sie hier.",
+      "a": "Meine Lösung zum 1. Video:\n\n<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n<style>\nbody {\npadding: 50px;\n}\nh2 {\npadding: 10px;\nborder: 1px solid black;\nbackground-color: rgba(255, 255, 255, 0.8);\nposition: sticky;\ntop: 0;\nz-index: 10;\n}\np {\nbackground-color: rgba(239, 239, 240);\n}\n</style>\n</head>\n<body>\n<h2>Erste Überschrift</h2>\n<p>\nLorem ipsum dolor sit amet...\n</p>\n<h2>Zweite Überschrift</h2>\n<p>\nLorem ipsum dolor sit amet...\n</p>\n<h2>Dritte Überschrift</h2>\n<p>\nLorem ipsum dolor sit amet...\n</p>\n</body>\n</html>\n\nMeine Lösung zum 2. Video:\n\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<title>Übung 2.2</title>\n<style>\n.container {\npadding: 20px;\nposition: relative;\n}\n\n.wrapper {\nborder: 1px black solid;\npadding: 10px;\n}\n\n#toggle:not(:checked) ~ .wrapper .content {\nopacity: 0;\n}\nimg {\nmax-width: 100%;\n}\n</style>\n</head>\n<body>\n<div class=\"container\">\n<h1>Übung 2.2</h1>\n\n<input type=\"checkbox\" id=\"toggle\" checked />\n<label for=\"toggle\">hide and show via checkbox</label>\n\n<div class=\"wrapper\">\n<div class=\"content\">\n<img\n class=\"content\"\n src=\"https://kaul.inf.h-brs.de/ccm/we/ws23/resources/assets/h-brs.jpg\"\n/>\n</div>\n</div>\n</div>\n</body>\n</html>"
+    },
+    {
+      "q": "Gegeben ist folgendes HTML-Wireframe:\n\nWireframe of a Survey form\n\nMit welchem HTML- und CSS-Code kann man dieses Wireframe exakt nachbilden? Schreiben Sie Ihren CSS-Code direkt in die HTML-Datei.\n\nDie grünliche Farbe ist #a9d7d1 und die Hintergrundfarbe vom HTML-Formular ist snow. Die Schriftart ist eine Google Font: Roboto.",
+      "a": `
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+      <h1>Survey Form</h1>
+    <div class="form-container">
+
+      <form action="#" method="post">
+        <p>Let us know how we can improve freeCodeCamp</p>
+        <table>
+          <tr class="formRow">
+            <th><label for="name">* Name:</label></th>
+            <td><input type="text" id="name" name="name" placeholder="Enter your name" /></td>
+          </tr>
+
+          <tr class="formRow">
+            <th><label for="email">* Email:</label></th>
+            <td><input type="email" id="email" name="email" placeholder="Enter your Email" /></td>
+          </tr>
+
+          <tr class="formRow">
+            <th><label for="age">* Age:</label></th>
+            <td><input type="number" id="age" name="age" placeholder="Age" /></td>
+          </tr>
+
+          <tr class="formRow">
+            <th><label for="role">Which option best describes your current role?</label></th>
+            <td>
+              <select id="role" name="role">
+                <option value="student">Student</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr class="formRow">
+            <th>How likely is that you would recommend freeCodeCamp to a friend?</th>
+            <td>
+              <div class="choiceGroup">
+                <div>
+                  <input type="radio" id="definitely" name="recommend" value="definitely" />
+                  <label for="definitely">Definitely</label>
+                </div>
+                <div>
+                  <input type="radio" id="maybe" name="recommend" value="maybe" />
+                  <label for="maybe">Maybe</label>
+                </div>
+                <div>
+                  <input type="radio" id="notsure" name="recommend" value="notsure" />
+                  <label for="notsure">Not sure</label>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr class="formRow">
+            <th><label for="like">What do you like most in FCC?</label></th>
+            <td>
+              <select id="like" name="like">
+                <option>Select an option</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr class="formRow">
+            <th>Things that should be improved in the future (Check all that apply):</th>
+            <td>
+              <div class="choiceGroup">
+                <div>
+                  <input type="checkbox" id="frontend" name="improve[]" value="frontend" />
+                  <label for="frontend">Front-end Projects</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="backend" name="improve[]" value="backend" />
+                  <label for="backend">Back-end Projects</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="data" name="improve[]" value="data" />
+                  <label for="data">Data Visualization</label>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+    body {
+      font-family: Roboto;
+      background-color: #a9d7d1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    select {
+      height: 30px;
+    }
+
+    .choiceGroup {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    th {
+      text-align: right;
+      padding-right: 10px;
+    }
+
+    td {
+      width: 30%;
+    }
+  </style>
+</html>
+      `,
+      demo: 'uebung2.html'
+    }
+  ]
+)
+kwArr.push(kw42)
 
 const navbar = document.querySelector(".horizontal")
 kwArr.forEach((kw) => {
