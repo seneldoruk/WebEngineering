@@ -1098,10 +1098,317 @@ const kw46 = parseAsKW("KW 46",
 kwArr.push(kw46)
 
 
-// const kw47 = parseAsKW("KW 47",
-
-// )
-// kwArr.push(kw47)
+const kw47 = parseAsKW("KW 47",
+  [
+    {
+      q: "Schreiben Sie eine Webseite, in die man eine Zeichenkette mit beliebigen Buchstaben, Zahlen und Sonderzeichen eingeben kann, die beliebig geschachtelte Klammern [...], (...) und {...} enthält, sodass sofort geprüft wird, ob alle Klammerpaare korrekt geschachtelt sind. Das Eingabefeld der Zeichenkette soll rot gefärbt werden, wenn es ein Klammerpaar gibt, das falsch geschachtelt ist. Verwenden Sie für Ihre Tests die Funktion console.assert. Bonus: Verallgemeinern Sie Ihren Algorithmus, sodass man Klammerpaare als Parameter frei definieren kann. Es müssen also nicht [...], (...) und {...} sein, sondern es können auch andere Zeichen gewählt werden.",
+      a: `
+  <!DOCTYPE html>
+  
+  <html>
+    <style>
+      input.invalid {
+        border-color: red;
+      }
+    </style>
+    <body>
+      <input
+        type="text"
+        id="inputString"
+        placeholder="Geben Sie hier Ihre Zeichenkette ein"
+        oninput="checkBrackets()"
+      />
+    </body>
+    <script>
+      function checkBrackets() {
+        let input = document.getElementById("inputString");
+        let str = input.value;
+        if (areBracketsBalanced(str)) {
+          input.classList.remove("invalid");
+        } else {
+          input.classList.add("invalid");
+        }
+      }
+  
+      function areBracketsBalanced(str) {
+        let stack = [];
+        let map = {
+          "]": "[",
+          ")": "(",
+          "}": "{",
+        };
+  
+        for (let ch of str) {
+          if ("[{(".includes(ch)) {
+            stack.push(ch);
+          } else if ("]})".includes(ch)) {
+            if (stack.length === 0 || stack.pop() !== map[ch]) {
+              return false;
+            }
+          }
+        }
+        return stack.length === 0;
+      }
+      console.assert(areBracketsBalanced("()"), "fehlgeschlagen");
+      console.assert(!areBracketsBalanced("(]"), "fehlgeschlagen");
+      console.assert(areBracketsBalanced("([])"), "fehlgeschlagen");
+      console.assert(!areBracketsBalanced("([{]})"), "fehlgeschlagen");
+    </script>
+  </html>
+    `
+    },
+    {
+      q: 'Schreiben Sie eine ES6-Klasse Vorrang für Vorrangrelationen, z.B.: const studentenLeben = new Vorrang( [[ "schlafen", "studieren" ], [ "essen", "studieren" ], [ "studieren", "prüfen" ] ] ) Wählen Sie eine Implementierung, die universell gültig, also nicht nur für dieses Beispiel gilt. (Überlegen Sie sich, über welche Properties und Methoden eine solche Klasse verfügen sollte und wie TopSort hier hineinspielt. Topologische Iterierbarkeit und topologischer Generator sind Gegenstand der nächsten Übungen weiter unten auf diesem Übungsblatt und sollten für die folgenden Aufgaben aufgespart werden.) Stellen Sie bei Ihrer Klasse die topologische Iterierbarkeit her (zunächst über das Iterationsprotokoll, ohne Generator, ohne yield). Zum Beispiel soll dadurch folgende for ... of loop möglich werden, mit der die Elemente in topologischer Sortierung durchlaufen werden: for ( const next of studentenLeben ) {console.log( next );} Auf der Entwicklerkonsole wird dadurch ausgegeben: schlafen essen studieren prüfen Eine topologische Sortierung im Konstruktor vorauszuberechnen, wäre eine triviale Lösung. Versuchen Sie es stattdessen mit "lazy computation", d.h. erst beim Aufruf von next() wird die erforderliche Berechnung durchgeführt. Achten Sie auf einen minimalen Aufwand, d.h. bei jedem next() soll nicht alles erneut sortiert werden. Verwenden Sie so weit wie möglich High-Level-Methoden wie Object.keys und High-Level-Datenstrukturen wie Map und Set und deren Methoden, anstatt mühsam von Hand zu iterieren und zu zählen. Verwenden Sie für Ihre Tests console.assert. Betten Sie Ihren ECMAScript-Code in eine Webseite ein, so dass man die Vorrangrelation dort eingeben kann.',
+      a: `
+  <!DOCTYPE html>
+  <html>
+    <head> </head>
+    <body>
+      <textarea id="inputArea" rows="6" cols="30">
+  schlafen, studieren
+  essen, studieren
+  studieren, prüfen
+      </textarea>
+      <br />
+      <button onclick="testVorrang()">Test Starten</button>
+    </body>
+    <script>
+      class Vorrang {
+        constructor(vorrangRelationen) {
+          this.adjList = new Map();
+          this.indegree = new Map();
+  
+          vorrangRelationen.forEach(([u, v]) => {
+            if (!this.adjList.has(u)) this.adjList.set(u, []);
+            if (!this.adjList.has(v)) this.adjList.set(v, []);
+            if (!this.indegree.has(u)) this.indegree.set(u, 0);
+            if (!this.indegree.has(v)) this.indegree.set(v, 0);
+  
+            this.adjList.get(u).push(v);
+            this.indegree.set(v, this.indegree.get(v) + 1);
+          });
+  
+          this.queue = [];
+          this.indegree.forEach((deg, node) => {
+            if (deg === 0) this.queue.push(node);
+          });
+  
+          this.current = this.queue.shift();
+        }
+  
+        [Symbol.iterator]() {
+          return {
+            next: () => {
+              if (this.current === undefined) {
+                return { done: true };
+              } else {
+                const result = { value: this.current, done: false };
+  
+                this.adjList.get(this.current).forEach((node) => {
+                  this.indegree.set(node, this.indegree.get(node) - 1);
+                  if (this.indegree.get(node) === 0) {
+                    this.queue.push(node);
+                  }
+                });
+  
+                this.current = this.queue.shift();
+                return result;
+              }
+            },
+          };
+        }
+      }
+      function parseInput(input) {
+        return input
+          .trim()
+          .split("\n")
+          .map((line) => line.split(",").map((item) => item.trim()));
+      }
+  
+      function testVorrang() {
+        const input = document.getElementById("inputArea").value;
+        const vorrangRelationen = parseInput(input);
+        const studentenLeben = new Vorrang(vorrangRelationen);
+  
+        const ergebnisse = [];
+        for (const next of studentenLeben) {
+          ergebnisse.push(next);
+        }
+  
+        console.log("Sorted:", ergebnisse);
+      }
+  
+      const studentenLeben = new Vorrang([
+        ["schlafen", "studieren"],
+        ["essen", "studieren"],
+        ["studieren", "prüfen"],
+      ]);
+  
+      var arr = [];
+      for (const next of studentenLeben) {
+        arr.push(next);
+      }
+      console.assert(
+        arr.toString() === ["schlafen", "essen", "studieren", "prüfen"].toString()
+      );
+    </script>
+  </html>
+  
+  `,
+    },
+    {
+      q: "Stellen Sie bei Ihrer Klasse aus der letzten Aufgabe die topologische Iterierbarkeit mittels Generator her. Wählen Sie eine Implementierung, die universell gültig, also nicht nur für das Beispiel gilt. Verwenden Sie für Ihre Tests console.assert.",
+      a: `
+  class Vorrang {
+      constructor(vorrangRelationen) {
+          this.adjList = new Map();
+          this.indegree = new Map();
+  
+          vorrangRelationen.forEach(([u, v]) => {
+              if (!this.adjList.has(u)) this.adjList.set(u, []);
+              if (!this.adjList.has(v)) this.adjList.set(v, []);
+              if (!this.indegree.has(u)) this.indegree.set(u, 0);
+              if (!this.indegree.has(v)) this.indegree.set(v, 0);
+  
+              this.adjList.get(u).push(v);
+              this.indegree.set(v, this.indegree.get(v) + 1);
+          });
+      }
+  
+      *[Symbol.iterator]() {
+          const queue = Array.from(this.indegree).filter(([node, deg]) => deg === 0).map(([node]) => node);
+  
+          while (queue.length > 0) {
+              const node = queue.shift();
+              yield node;
+  
+              this.adjList.get(node).forEach(adjNode => {
+                  this.indegree.set(adjNode, this.indegree.get(adjNode) - 1);
+                  if (this.indegree.get(adjNode) === 0) {
+                      queue.push(adjNode);
+                  }
+              });
+          }
+      }
+  }
+  
+  const studentenLeben = new Vorrang([
+      ["schlafen", "studieren"],
+      ["essen", "studieren"],
+      ["studieren", "prüfen"]
+  ]);
+  var arr = [];
+  for (const next of studentenLeben) {
+      arr.push(next);
+  }
+  console.assert(
+      arr.toString() === ["schlafen", "essen", "studieren", "prüfen"].toString()
+  );
+  
+    `
+    },
+    {
+      q: "Erweitern Sie Ihre Vorrang-Klasse um Logging, indem Sie ein Proxy einfügen. Lassen Sie sich vom Logger bei jedem Schritt ausgeben, wie viele der Vorrangrelationen noch übrig bleiben. Verwenden Sie wieder so weit wie möglich Object.keys, Map und Set und für Ihre Tests console.assert.",
+      a: `
+  class Vorrang {
+      constructor(vorrangRelationen) {
+          this.adjList = new Map();
+          this.indegree = new Map();
+  
+          vorrangRelationen.forEach(([u, v]) => {
+              if (!this.adjList.has(u)) this.adjList.set(u, []);
+              if (!this.adjList.has(v)) this.adjList.set(v, []);
+              if (!this.indegree.has(u)) this.indegree.set(u, 0);
+              if (!this.indegree.has(v)) this.indegree.set(v, 0);
+  
+              this.adjList.get(u).push(v);
+              this.indegree.set(v, this.indegree.get(v) + 1);
+          });
+      }
+  
+      *[Symbol.iterator]() {
+          const queue = Array.from(this.indegree).filter(([node, deg]) => deg === 0).map(([node]) => node);
+  
+          while (queue.length > 0) {
+              const node = queue.shift();
+              yield node;
+  
+              this.adjList.get(node).forEach(adjNode => {
+                  this.indegree.set(adjNode, this.indegree.get(adjNode) - 1);
+                  if (this.indegree.get(adjNode) === 0) {
+                      queue.push(adjNode);
+                  }
+              });
+          }
+      }
+  }
+  function createVorrangProxy(vorrangRelationen) {
+      const vorrang = new Vorrang(vorrangRelationen);
+      let verbleibendeRelationen = vorrangRelationen.length;
+  
+      return new Proxy(vorrang, {
+          get(target, prop, receiver) {
+              if (typeof target[prop] === 'function' && prop === Symbol.iterator) {
+                  return function* () {
+                      const generator = target[prop].call(this);
+  
+                      let result = generator.next();
+                      while (!result.done) {
+                          console.log(\`Bleibt: \${verbleibendeRelationen}\`);
+                          yield result.value;
+  
+                          verbleibendeRelationen--;
+                          result = generator.next();
+                      }
+                  }
+              }
+              return Reflect.get(target, prop, receiver);
+          }
+      });
+  }
+  
+  
+  const studentenLeben = createVorrangProxy([
+      ["schlafen", "studieren"],
+      ["essen", "studieren"],
+      ["studieren", "prüfen"]
+  ]);
+  var arr = [];
+  for (const next of studentenLeben) {
+      arr.push(next);
+  }
+  console.assert(
+      arr.toString() === ["schlafen", "essen", "studieren", "prüfen"].toString()
+  );
+    `
+    },
+    {
+      q: "Schreiben Sie eine rekursive Funktion deepCopy( struct ) als ES6-Ausdruck, sodass beliebig geschachtelte Arrays und Objekte tiefenkopiert werden können. Verwenden Sie zu diesem Zweck: konditionalen ternären Operator Array.map() Object.fromEntries() Object.entries() Verwenden Sie dabei nur Arrow-Funktionen und Ausdrücke, keine Anweisungen, keine Blöcke und keine JSON-Methoden. Nutzen Sie für Ihre Tests console.assert.",
+      a: `
+  const isObject = obj => obj && typeof obj === 'object';
+  
+  const deepCopy = struct =>
+      Array.isArray(struct) ?
+          struct.map(deepCopy) :
+          isObject(struct) ?
+              Object.fromEntries(Object.entries(struct).map(([k, v]) => [k, deepCopy(v)])) :
+              struct;
+  
+  const original = {
+      a: 1,
+      b: { c: 2, d: [3, 4, { e: 5 }] },
+      f: [6, { g: 7 }]
+  };
+  
+  const copy = deepCopy(original);
+  
+  console.assert(copy !== original);
+  console.assert(copy.b !== original.b);
+  `
+    }
+  ]
+)
+kwArr.push(kw47)
 
 const kw48 = parseAsKW("KW 48", [
   {
