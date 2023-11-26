@@ -1,37 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <style></style>
+    <title>Solution Navigator</title>
+  </head>
   <body>
-    <h1>Übungen</h1>
+    <div class="header">
+      <h1>Solution Navigator</h1>
+      <h5>Doruk Senel</h5>
+    </div>
+    <ul class="horizontal"></ul>
     <div class="container">
-      <a href="uebung1.html">Übung 1</a>
-      <a href="uebung2.html">Übung 2</a>
-      <a href="uebung3.html">Übung 3</a>
-      <a href="uebung5.html">Übung 5</a>
-      <a href="uebung6.html">Übung 6</a>
+      <div id="entrypoint"></div>
     </div>
   </body>
-  <style>
-    .container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-gap: 10px;
-    }
-    a {
-      background-color: #ec933f;
-      color: white;
-      text-decoration: none;
-      padding: 10px;
-      border-radius: 5px;
-      text-align: center;
-    }
-    a:hover {
-      background-color: #ec933f;
-      color: white;
-      text-decoration: none;
-      padding: 10px;
-      border-radius: 5px;
-      text-align: center;
-      opacity: 0.8;
-    }
-  </style>
+  <script src="js/classes.js"></script>
+  <script src="js/uebungen.js"></script>
+  <script>
+    const navbar = document.querySelector(".horizontal");
+    kwArr.forEach((kw) => {
+      const title = kw.title;
+
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+
+      const funcName = `${title
+        .toLowerCase()
+        .replace(/\s/g, "")}.renderSelf(this)`;
+      a.setAttribute("onclick", funcName);
+
+      const titleToRender = `- ${title} -`;
+      a.textContent = titleToRender;
+
+      li.appendChild(a);
+      navbar.appendChild(li);
+    });
+
+    navbar.children[0].firstChild.click();
+  </script>
 </html>
