@@ -26,4 +26,26 @@
   </body>
   <script src="js/classes.js"></script>
   <script src="js/uebungen.js"></script>
+  <script>
+    const navbar = document.querySelector(".horizontal");
+    kwArr.forEach((kw) => {
+      const title = kw.title;
+
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+
+      const funcName = `${title
+        .toLowerCase()
+        .replace(/\s/g, "")}.renderSelf(this)`;
+      a.setAttribute("onclick", funcName);
+
+      const titleToRender = `- ${title} -`;
+      a.textContent = titleToRender;
+
+      li.appendChild(a);
+      navbar.appendChild(li);
+    });
+
+    navbar.children[0].firstChild.click();
+  </script>
 </html>

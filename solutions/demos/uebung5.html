@@ -1,7 +1,7 @@
 <!DOCTYPE html>
   <head>
     <style>
-      #rednerInput {
+      #speakerInput {
         margin-bottom: 10px;
       }
       #rednerList {
@@ -19,7 +19,7 @@
   <body>
     <h2>Rednerliste</h2>
 
-    <input type="text" id="rednerInput" placeholder="Neuer Redner" />
+    <input type="text" id="speakerInput" placeholder="Neuer Redner" />
     <button id="addButton">Hinzufügen</button>
 
     <ul id="rednerList"></ul>
@@ -40,7 +40,7 @@
           const listItem = document.createElement("li");
           listItem.textContent = name + " 00:00:00";
           listItem.id = name;
-          document.getElementById("speakersList").appendChild(listItem);
+          document.getElementById("rednerList").appendChild(listItem);
 
           timers[name] = {
             time: 0,
