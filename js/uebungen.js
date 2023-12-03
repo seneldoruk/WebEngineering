@@ -1617,3 +1617,204 @@ const kw48 = parseAsKW("KW 48", [
   }
 ])
 kwArr.push(kw48)
+
+
+const kw49 = parseAsKW("KW 49", [
+  {
+    q: `Erstellen Sie auf Ihrem lokalen Server (localhost) zwei Text-Dateien A.txt und B.txt mit ungefähr gleich vielen Zeilen. Laden Sie mit der fetch-API parallel beide Text-Dateien vom Server. Geben Sie auf einer Webseite den Inhalt beider Dateien zeilenweise aus, wobei der Anfang der Zeile aus A.txt und das Ende aus B.txt stammen soll. Die beiden Dateien sollen also zeilenweise konkateniert werden. Erzielen Sie max. Geschwindigkeit durch maximale Parallelität. Achten Sie gleichzeitig auf Korrektheit. Verwenden Sie dabei ausschließlich die Promise-API ohne async/await.`,
+    a: `
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <script>
+      function fetchTextFile(url) {
+        return fetch(url).then((response) => response.text());
+      }
+
+      function combineAndDisplayLines(urlA, urlB) {
+        Promise.all([fetchTextFile(urlA), fetchTextFile(urlB)])
+          .then((texts) => {
+            const linesA = texts[0].split("\n");
+            const linesB = texts[1].split("\n");
+            const minLength = Math.min(linesA.length, linesB.length);
+            const combinedLines = [];
+
+            for (let i = 0; i < minLength; i++) {
+              combinedLines.push(linesA[i] + linesB[i]);
+            }
+
+            const contentDiv = document.getElementById("content");
+            combinedLines.forEach((line) => {
+              const paragraph = document.createElement("p");
+              paragraph.textContent = line;
+              contentDiv.appendChild(paragraph);
+            });
+          })
+          .catch((error) => {
+            console.log("Error");
+          });
+      }
+
+      combineAndDisplayLines("A.txt", "B.txt");
+    </script>
+  </body>
+</html>
+    `
+  },
+  {
+    q: `Lösen Sie die letzte Aufgabe mit async/await statt Promise.`,
+    a: `
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <script>
+      async function fetchTextFile(url) {
+        const response = await fetch(url);
+        return response.text();
+      }
+
+      async function combineAndDisplayLines(urlA, urlB) {
+        const [textA, textB] = await Promise.all([
+          fetchTextFile(urlA),
+          fetchTextFile(urlB),
+        ]);
+        const linesA = textA.split("\n");
+        const linesB = textB.split("\n");
+        const minLength = Math.min(linesA.length, linesB.length);
+        const contentDiv = document.getElementById("content");
+
+        for (let i = 0; i < minLength; i++) {
+          const paragraph = document.createElement("p");
+          paragraph.textContent = linesA[i] + linesB[i];
+          contentDiv.appendChild(paragraph);
+        }
+      }
+
+      combineAndDisplayLines("A.txt", "B.txt");
+    </script>
+  </body>
+</html>
+`
+  },
+  {
+    q: `Schreiben Sie einen Navigator für die Fachbegriffe des WWW zu den Oberthemen HTML, CSS und JavaScript. Im Hauptmenü sollen diese 3 Oberthemen zur Auswahl stehen. Im Untermenü soll eine zugehörige Liste von Fachbegriffen zum jeweiligen ausgewählten Oberthema stehen. In der Mitte soll eine Dokumentation zum ausgewählten Fachbegriff erscheinen. Schreiben Sie in HTML und CSS nur den responsiven Rahmen für einen solchen WWW-Navigator. Dabei können Sie auch ein schöneres Layout als das hier gezeigte erstellen. Die Inhalte sollen in einer JSON-Datei extern gelagert werden. Mit der fetch-API soll die JSON-Datei asynchron nicht-blockierend geladen werden, und zwar nur einmal, nicht mehrfach. (d.h. Sparen Sie Internet-Bandbreite.) Sobald die Inhalte angekommen sind, sollen sie im Browser auch sofort angezeigt werden. Fügen Sie selbst in die JSON-Datei zusätzliche Inhalte zu Themen der Vorlesung als Strings beispielhaft ein. Wenn Sie Inhalte aus fremden Quellen kopieren, so schreiben Sie bitte stets die Quelle als externe Ressource hinzu. Diese soll dann auf der rechten Seite im WWW-Navigator erscheinen.`,
+    a: `
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WWW-Navigator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      #container {
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+      }
+
+      #main-menu,
+      #sub-menu,
+      #content,
+      #references {
+        padding: 20px;
+        border: 1px solid #ccc;
+        margin: 10px;
+      }
+
+      #main-menu,
+      #sub-menu {
+        flex-basis: 20%;
+      }
+
+      #content {
+        flex-grow: 2;
+      }
+
+      #references {
+        flex-basis: 30%;
+      }
+
+      @media (max-width: 768px) {
+        #container {
+          flex-direction: column;
+        }
+
+        #main-menu,
+        #sub-menu,
+        #content,
+        #references {
+          flex-basis: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <nav id="main-menu"></nav>
+      <nav id="sub-menu"></nav>
+      <section id="content"></section>
+      <aside id="references"></aside>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("/demos/uebung9.json")
+          .then((data) => data.json())
+          .then((data) => populateMainMenu(data));
+      });
+
+      function populateMainMenu(data) {
+        const mainMenu = document.getElementById("main-menu");
+        for (const topic in data) {
+          const button = document.createElement("button");
+          button.textContent = topic.toUpperCase();
+          button.onclick = () => populateSubMenu(data[topic]);
+          mainMenu.appendChild(button);
+        }
+      }
+
+      function populateSubMenu(topicData) {
+        const subMenu = document.getElementById("sub-menu");
+        subMenu.innerHTML = "";
+
+        for (const key in topicData) {
+          const button = document.createElement("button");
+          button.textContent = key;
+          button.onclick = () => displayContent(topicData[key]);
+          subMenu.appendChild(button);
+        }
+      }
+
+      function displayContent(itemData) {
+        const content = document.getElementById("content");
+        const references = document.getElementById("references");
+        content.innerHTML = \`< h2 > \${itemData.content}</ > \`;
+        references.innerHTML = "";
+
+        const refList = document.createElement("ul");
+        itemData.references.forEach((url) => {
+          const listItem = document.createElement("li");
+          listItem.innerHTML = \`< a href = "\${url}" target = "_blank" > \${url}</ > \`;
+          refList.appendChild(listItem);
+        });
+        references.appendChild(refList);
+      }
+    </script>
+  </body>
+</html>
+
+`,
+    demo: "uebung9.html"
+  }
+])
+kwArr.push(kw49)

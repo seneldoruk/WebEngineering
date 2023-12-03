@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      #container {
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+      }
+
+      #main-menu,
+      #sub-menu,
+      #content,
+      #references {
+        padding: 20px;
+        border: 1px solid #ccc;
+        margin: 10px;
+      }
+
+      #main-menu,
+      #sub-menu {
+        flex-basis: 20%;
+      }
+
+      #content {
+        flex-grow: 2;
+      }
+
+      #references {
+        flex-basis: 30%;
+      }
+
+      @media (max-width: 768px) {
+        #container {
+          flex-direction: column;
+        }
+
+        #main-menu,
+        #sub-menu,
+        #content,
+        #references {
+          flex-basis: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <nav id="main-menu"></nav>
+      <nav id="sub-menu"></nav>
+      <section id="content"></section>
+      <aside id="references"></aside>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("/demos/uebung9.json")
+          .then((data) => data.json())
+          .then((data) => populateMainMenu(data));
+      });
+
+      function populateMainMenu(data) {
+        const mainMenu = document.getElementById("main-menu");
+        for (const topic in data) {
+          const button = document.createElement("button");
+          button.textContent = topic.toUpperCase();
+          button.onclick = () => populateSubMenu(data[topic]);
+          mainMenu.appendChild(button);
+        }
+      }
+
+      function populateSubMenu(topicData) {
+        const subMenu = document.getElementById("sub-menu");
+        subMenu.innerHTML = "";
+
+        for (const key in topicData) {
+          const button = document.createElement("button");
+          button.textContent = key;
+          button.onclick = () => displayContent(topicData[key]);
+          subMenu.appendChild(button);
+        }
+      }
+
+      function displayContent(itemData) {
+        const content = document.getElementById("content");
+        const references = document.getElementById("references");
+        content.innerHTML = `<h2>${itemData.content}</h2>`;
+        references.innerHTML = "";
+
+        const refList = document.createElement("ul");
+        itemData.references.forEach((url) => {
+          const listItem = document.createElement("li");
+          listItem.innerHTML = `<a href="${url}" target="_blank">${url}</a>`;
+          refList.appendChild(listItem);
+        });
+        references.appendChild(refList);
+      }
+    </script>
+  </body>
+</html>
