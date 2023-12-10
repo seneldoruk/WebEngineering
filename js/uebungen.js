@@ -1,6 +1,8 @@
-const kwArr = []
+const kwArr = [];
 function parseAsKW(title, arr) {
-  const qaObjects = arr.map(item => new QuestionAndAnswer(item.q, item.a, item.demo));
+  const qaObjects = arr.map(
+    (item) => new QuestionAndAnswer(item.q, item.a, item.demo)
+  );
 
   return new KalenderWoche(title, qaObjects);
 }
@@ -16,7 +18,7 @@ Was wäre der Preis für die garantierte Verhinderung von "broken links"?
 1 - Die Community dachte, dass das Konzept von TBL ein Rückschritt wäre, besonders weil Broken Links möglich sind
 2 - unabhängig von Hardware oder Software zugänglich, frei verfügbar,  Unterstützung von Robert Cailliau 
 3 - Für Referentielle Integrität muss man die Links von Seiten nicht andern dürfen
-`
+`,
   },
   {
     q: `
@@ -32,7 +34,7 @@ In einer Webanwendung benötigen Sie eine OPTIONS-Anfrage, die die Optionen des 
 400:  ungültig oder falsch 
 403:  Zugriff nicht erlaubt
 Cache-Control header kann benutzt werden
-`
+`,
   },
   {
     q: ``,
@@ -64,7 +66,7 @@ Dieser Abschnitt wurde auskommentiert.
 -->
 </body>
 </html>
-`
+`,
   },
   {
     q: `
@@ -112,7 +114,7 @@ Welche Attribute sollte man bei Bildern wie verwenden?
 <img
 src="https://kaul.inf.h-brs.de/ccm/we/ws23/resources/assets/tbl.jpg"
 alt="TBL" />
-`
+`,
   },
   {
     q: `
@@ -219,29 +221,28 @@ Mit welchem HTML-Code (ohne CSS, nur mit HTML-Tags) kann man dieses Wireframe ex
   </body>
 </html>
 `,
-    demo: 'uebung1.html'
-  }
-])
+    demo: "uebung1.html",
+  },
+]);
 
-kwArr.push(kw41)
+kwArr.push(kw41);
 
-const kw42 = parseAsKW("KW 42",
-  [
-    {
-      "q": "Berechnen Sie die Spezifität folgender CSS-Selektoren:\n\n- div div div:focus .inner\n- h1 + div.main\n- div a:link[href*='h-brs']\n- nav > a:hover::before\n- ul#primary-nav li.active",
-      "a": "- 0-2-3\n- 0-1-2\n- 0-2-2\n- 0-1-3\n- 1-1-2"
-    },
-    {
-      "q": "Rechnen Sie folgende RGB-Werte mit den DevTools des Webbrowsers in HSL-Werte um:\n\n- #ffffff\n- #000\n- #ab0978\n- rgb(127,255,33)\n- rgba(255,127,33,0.8)",
-      "a": "- 0deg, 0%, 100% (hex in HSL)\n- 0deg,0%,0% (hex in HSL)\n- 318.89deg, 90%, 35.29%\n- 94.59deg, 100%, 56.47%\n- 25.41deg, 12.94%, 56.47% / 80%"
-    },
-    {
-      "q": "Bauen Sie das dynamische Verhalten in den folgenden beiden Videos exakt nach:\n\n- [Video 1 Link](https://www.youtube.com/watch?v=PE3POxjDspo)\n- [Video 2 Link](https://www.youtube.com/watch?v=HVmnv3k4__E)\n\nArbeiten Sie in beiden Fällen nur mit HTML und CSS, ohne JavaScript.\n\nDas Bild aus dem zweiten Video finden Sie hier.",
-      "a": " zum 1. Video:\n\n<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n<style>\nbody {\npadding: 50px;\n}\nh2 {\npadding: 10px;\nborder: 1px solid black;\nbackground-color: rgba(255, 255, 255, 0.8);\nposition: sticky;\ntop: 0;\nz-index: 10;\n}\np {\nbackground-color: rgba(239, 239, 240);\n}\n</style>\n</head>\n<body>\n<h2>Erste Überschrift</h2>\n<p>\nLorem ipsum dolor sit amet...\n</p>\n<h2>Zweite Überschrift</h2>\n<p>\nLorem ipsum dolor sit amet...\n</p>\n<h2>Dritte Überschrift</h2>\n<p>\nLorem ipsum dolor sit amet...\n</p>\n</body>\n</html>\n\n zum 2. Video:\n\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<title>Übung 2.2</title>\n<style>\n.container {\npadding: 20px;\nposition: relative;\n}\n\n.wrapper {\nborder: 1px black solid;\npadding: 10px;\n}\n\n#toggle:not(:checked) ~ .wrapper .content {\nopacity: 0;\n}\nimg {\nmax-width: 100%;\n}\n</style>\n</head>\n<body>\n<div class=\"container\">\n<h1>Übung 2.2</h1>\n\n<input type=\"checkbox\" id=\"toggle\" checked />\n<label for=\"toggle\">hide and show via checkbox</label>\n\n<div class=\"wrapper\">\n<div class=\"content\">\n<img\n class=\"content\"\n src=\"https://kaul.inf.h-brs.de/ccm/we/ws23/resources/assets/h-brs.jpg\"\n/>\n</div>\n</div>\n</div>\n</body>\n</html>"
-    },
-    {
-      "q": "Gegeben ist folgendes HTML-Wireframe:\n\nWireframe of a Survey form\n\nMit welchem HTML- und CSS-Code kann man dieses Wireframe exakt nachbilden? Schreiben Sie Ihren CSS-Code direkt in die HTML-Datei.\n\nDie grünliche Farbe ist #a9d7d1 und die Hintergrundfarbe vom HTML-Formular ist snow. Die Schriftart ist eine Google Font: Roboto.",
-      "a": `
+const kw42 = parseAsKW("KW 42", [
+  {
+    q: "Berechnen Sie die Spezifität folgender CSS-Selektoren:\n\n- div div div:focus .inner\n- h1 + div.main\n- div a:link[href*='h-brs']\n- nav > a:hover::before\n- ul#primary-nav li.active",
+    a: "- 0-2-3\n- 0-1-2\n- 0-2-2\n- 0-1-3\n- 1-1-2",
+  },
+  {
+    q: "Rechnen Sie folgende RGB-Werte mit den DevTools des Webbrowsers in HSL-Werte um:\n\n- #ffffff\n- #000\n- #ab0978\n- rgb(127,255,33)\n- rgba(255,127,33,0.8)",
+    a: "- 0deg, 0%, 100% (hex in HSL)\n- 0deg,0%,0% (hex in HSL)\n- 318.89deg, 90%, 35.29%\n- 94.59deg, 100%, 56.47%\n- 25.41deg, 12.94%, 56.47% / 80%",
+  },
+  {
+    q: "Bauen Sie das dynamische Verhalten in den folgenden beiden Videos exakt nach:\n\n- [Video 1 Link](https://www.youtube.com/watch?v=PE3POxjDspo)\n- [Video 2 Link](https://www.youtube.com/watch?v=HVmnv3k4__E)\n\nArbeiten Sie in beiden Fällen nur mit HTML und CSS, ohne JavaScript.\n\nDas Bild aus dem zweiten Video finden Sie hier.",
+    a: ' zum 1. Video:\n\n<!DOCTYPE html>\n<html lang="de">\n<head>\n<style>\nbody {\npadding: 50px;\n}\nh2 {\npadding: 10px;\nborder: 1px solid black;\nbackground-color: rgba(255, 255, 255, 0.8);\nposition: sticky;\ntop: 0;\nz-index: 10;\n}\np {\nbackground-color: rgba(239, 239, 240);\n}\n</style>\n</head>\n<body>\n<h2>Erste Überschrift</h2>\n<p>\nLorem ipsum dolor sit amet...\n</p>\n<h2>Zweite Überschrift</h2>\n<p>\nLorem ipsum dolor sit amet...\n</p>\n<h2>Dritte Überschrift</h2>\n<p>\nLorem ipsum dolor sit amet...\n</p>\n</body>\n</html>\n\n zum 2. Video:\n\n<!DOCTYPE html>\n<html lang="en">\n<head>\n<title>Übung 2.2</title>\n<style>\n.container {\npadding: 20px;\nposition: relative;\n}\n\n.wrapper {\nborder: 1px black solid;\npadding: 10px;\n}\n\n#toggle:not(:checked) ~ .wrapper .content {\nopacity: 0;\n}\nimg {\nmax-width: 100%;\n}\n</style>\n</head>\n<body>\n<div class="container">\n<h1>Übung 2.2</h1>\n\n<input type="checkbox" id="toggle" checked />\n<label for="toggle">hide and show via checkbox</label>\n\n<div class="wrapper">\n<div class="content">\n<img\n class="content"\n src="https://kaul.inf.h-brs.de/ccm/we/ws23/resources/assets/h-brs.jpg"\n/>\n</div>\n</div>\n</div>\n</body>\n</html>',
+  },
+  {
+    q: "Gegeben ist folgendes HTML-Wireframe:\n\nWireframe of a Survey form\n\nMit welchem HTML- und CSS-Code kann man dieses Wireframe exakt nachbilden? Schreiben Sie Ihren CSS-Code direkt in die HTML-Datei.\n\nDie grünliche Farbe ist #a9d7d1 und die Hintergrundfarbe vom HTML-Formular ist snow. Die Schriftart ist eine Google Font: Roboto.",
+    a: `
 <!DOCTYPE html>
 <html lang="en">
   <body>
@@ -379,21 +380,19 @@ const kw42 = parseAsKW("KW 42",
   </style>
 </html>
       `,
-      demo: 'uebung2.html'
-    }
-  ]
-)
-kwArr.push(kw42)
+    demo: "uebung2.html",
+  },
+]);
+kwArr.push(kw42);
 
-const kw43 = parseAsKW("KW 43",
-  [
-    {
-      q: `
+const kw43 = parseAsKW("KW 43", [
+  {
+    q: `
 Spielen Sie zunächst das Flexbox Froggy-Spiel, um Flexbox zu lernen.
 
 Implementieren Sie dann ausschließlich mit HTML, CSS und Flexbox das folgende Responsive Webdesign nach der Desktop-First-Strategie:
     `,
-      a: `
+    a: `
 <!DOCTYPE html>
 <html>
   <head>
@@ -485,16 +484,16 @@ Implementieren Sie dann ausschließlich mit HTML, CSS und Flexbox das folgende R
   </body>
 </html>
     `,
-    },
-    {
-      q: `
+  },
+  {
+    q: `
 Spielen Sie zunächst das Grid Garden-Spiel, um Grid zu lernen.
 
 Implementieren Sie dann das gleiche Responsive Webdesign wie zuvor in Aufgabe 3.1, allerdings diesmal mit Grid und der Mobile-First-Strategie. Vermeiden Sie außerdem das Erscheinen von horizontalen Scrollbars so weit wie möglich.
 
 :
     `,
-      a: `
+    a: `
 <!DOCTYPE html>
 <html>
   <head>
@@ -559,9 +558,9 @@ Implementieren Sie dann das gleiche Responsive Webdesign wie zuvor in Aufgabe 3.
   </body>
 </html>
     `,
-    },
-    {
-      q: `
+  },
+  {
+    q: `
 Implementieren Sie folgende Landing-Page responsiv mit Grid:
 
 Landing Page
@@ -570,7 +569,7 @@ Vermeiden Sie auch hier das Erscheinen von horizontalen Scrollbars so weit wie m
 
 :
     `,
-      a: `
+    a: `
 <!DOCTYPE html>
 <html>
   <head>
@@ -683,36 +682,33 @@ Vermeiden Sie auch hier das Erscheinen von horizontalen Scrollbars so weit wie m
   </body>
 </html>
     `,
-      demo: 'uebung3.html'
-    },
-  ]
-)
-kwArr.push(kw43)
+    demo: "uebung3.html",
+  },
+]);
+kwArr.push(kw43);
 
-
-const kw45 = parseAsKW("KW 45",
-  [
-    {
-      q: "Eine Funktion identity(), die ein Argument als Parameter entgegennimmt und dieses als Ergebnis zurückgibt.",
-      a: `
+const kw45 = parseAsKW("KW 45", [
+  {
+    q: "Eine Funktion identity(), die ein Argument als Parameter entgegennimmt und dieses als Ergebnis zurückgibt.",
+    a: `
 function identity(x) {
   return x;
 }
     `,
-    },
-    {
-      q: "Eine Funktion identity_function(), die ein Argument als Parameter entgegennimmt und eine Funktion zurückgibt, die dieses Argument zurückgibt.",
-      a: `
+  },
+  {
+    q: "Eine Funktion identity_function(), die ein Argument als Parameter entgegennimmt und eine Funktion zurückgibt, die dieses Argument zurückgibt.",
+    a: `
 function identity_function(x) {
   return function() {
     return x;
   };
 }
     `,
-    },
-    {
-      q: "Zwei binäre Funktionen add und mul, die Summe und Produkt berechnen.",
-      a: `
+  },
+  {
+    q: "Zwei binäre Funktionen add und mul, die Summe und Produkt berechnen.",
+    a: `
 function add(x, y) {
   return x + y;
 }
@@ -721,20 +717,20 @@ function mul(x, y) {
   return x * y;
 }
     `,
-    },
-    {
-      q: "Eine Addierer-Funktion addf(), so dass addf(x)(y) genau x + y zurückgibt. (Es haben also zwei Funktionsaufrufe zu erfolgen. addf(x) liefert eine Funktion, die auf y angewandt wird.)",
-      a: `
+  },
+  {
+    q: "Eine Addierer-Funktion addf(), so dass addf(x)(y) genau x + y zurückgibt. (Es haben also zwei Funktionsaufrufe zu erfolgen. addf(x) liefert eine Funktion, die auf y angewandt wird.)",
+    a: `
 function addf(x) {
   return function(y) {
     return x + y;
   };
 }
     `,
-    },
-    {
-      q: "Eine Funktion applyf(), die aus einer binären Funktion wie add(x,y) eine Funktion addf berechnet, die mit zwei Aufrufen das gleiche Ergebnis liefert, z.B. addf = applyf(add); addf(x)(y) soll add(x,y) liefern.",
-      a: `
+  },
+  {
+    q: "Eine Funktion applyf(), die aus einer binären Funktion wie add(x,y) eine Funktion addf berechnet, die mit zwei Aufrufen das gleiche Ergebnis liefert, z.B. addf = applyf(add); addf(x)(y) soll add(x,y) liefern.",
+    a: `
 function applyf(binaryFunc) {
   return function(x) {
     return function(y) {
@@ -743,10 +739,10 @@ function applyf(binaryFunc) {
   };
 }
     `,
-    },
-    {
-      q: "Schreiben Sie die Prototypen Person und Auto in JavaScript, sodass jede Person weiß, welche Autos sie besitzt. Schreiben Sie eine Funktion conflict(), die feststellt, ob ein Auto von mehr als einer Person besessen wird.",
-      a: `
+  },
+  {
+    q: "Schreiben Sie die Prototypen Person und Auto in JavaScript, sodass jede Person weiß, welche Autos sie besitzt. Schreiben Sie eine Funktion conflict(), die feststellt, ob ein Auto von mehr als einer Person besessen wird.",
+    a: `
 function Auto(marke, modell, kennzeichen) {
   this.marke = marke;
   this.modell = modell;
@@ -782,10 +778,10 @@ function conflict(personen) {
   }
 }
     `,
-    },
-    {
-      q: "Schreiben Sie im Browser die Fibonacci-Funktion in JS und geben Sie die ersten 2000 Fibonacci-Zahlen 0,1,1,2,3,5,8,13,... auf der Konsole mit console.log() aus.",
-      a: `
+  },
+  {
+    q: "Schreiben Sie im Browser die Fibonacci-Funktion in JS und geben Sie die ersten 2000 Fibonacci-Zahlen 0,1,1,2,3,5,8,13,... auf der Konsole mit console.log() aus.",
+    a: `
 // Aufgabe 3
 function fibonacci(n) {
   let fib = [0n, 1n];
@@ -797,10 +793,10 @@ function fibonacci(n) {
 
 console.log(fibonacci(2000));
     `,
-    },
-    {
-      q: "Was ist die größte Fibonacci-Zahl, die sich noch als Integer sicher speichern lässt (Number.MAX_SAFE_INTEGER)? Die wievielte Zahl in der Fibonacci-Folge ist das?",
-      a: `
+  },
+  {
+    q: "Was ist die größte Fibonacci-Zahl, die sich noch als Integer sicher speichern lässt (Number.MAX_SAFE_INTEGER)? Die wievielte Zahl in der Fibonacci-Folge ist das?",
+    a: `
 // Aufgabe 1
 function fibonacci(n) {
   let fib = [0n, 1n];
@@ -818,10 +814,10 @@ function fibonacci(n) {
 fibonacci(2000);
 // Output: 78: 8944394323791464
     `,
-    },
-    {
-      q: "Was ist die größte Fibonacci-Zahl, die sich noch als Number speichern lässt (Number.MAX_VALUE)? Die wievielte Zahl in der Fibonacci-Folge ist das?",
-      a: `
+  },
+  {
+    q: "Was ist die größte Fibonacci-Zahl, die sich noch als Number speichern lässt (Number.MAX_VALUE)? Die wievielte Zahl in der Fibonacci-Folge ist das?",
+    a: `
 // Aufgabe 2
 function fibonacci(n) {
   let fib = [0n, 1n];
@@ -839,10 +835,10 @@ function fibonacci(n) {
 fibonacci(2000);
 // Output: 1476: 130698922376339931803631155380271983098392443907412640726006659460192793070479231740288681087777017721095463154979012276234322246936939647185366706368489362660844147449941348462800922755818969634743348982916424954062744135969865615407276492410653721774590669544801490837649161732095972658064630033793347171632
     `,
-    },
-    {
-      q: "Wechseln Sie zu BigInt, um alle 2000 Fibonacci-Zahlen korrekt anzuzeigen.",
-      a: `
+  },
+  {
+    q: "Wechseln Sie zu BigInt, um alle 2000 Fibonacci-Zahlen korrekt anzuzeigen.",
+    a: `
 // Aufgabe 3
 function fibonacci(n) {
   let fib = [0n, 1n];
@@ -854,14 +850,14 @@ function fibonacci(n) {
 
 console.log(fibonacci(2000));
     `,
-    },
-    {
-      q: "Optional: Was ist die größte Fibonacci-Zahl, die Sie mit BigInt korrekt berechnet haben? An welcher Stelle in der Fibonacci-Folge steht diese?",
-      a: "Die größte Fibonacci-Zahl, die sich mit BigInt korrekt berechnen lässt, ist 2000: 39406014605753609255676250506383186276236444006662701760096904291658135187084551371007366712955491224032388959026156823325454784145354754676577824222200350615079297804422436038119645042066201108523211893066978845349234900329165795636667677676886685475464902400448029...",
-    },
-    {
-      q: "Schreiben Sie in JavaScript eine Funktion topsort(), die eine topologische Sortierung berechnet. Topologische Sortierung ist eine Form von Sortierung. Sie kennen die Funktion Array.prototype.sort() und wissen, was als Ergebnis erwartet wird, nämlich eine sortierte Liste. Genauso ist das hier. Die Funktion topsort() soll eine sortierte Liste ausgeben, die keine der eingegebenen Abhängigkeiten verletzt.",
-      a: `
+  },
+  {
+    q: "Optional: Was ist die größte Fibonacci-Zahl, die Sie mit BigInt korrekt berechnet haben? An welcher Stelle in der Fibonacci-Folge steht diese?",
+    a: "Die größte Fibonacci-Zahl, die sich mit BigInt korrekt berechnen lässt, ist 2000: 39406014605753609255676250506383186276236444006662701760096904291658135187084551371007366712955491224032388959026156823325454784145354754676577824222200350615079297804422436038119645042066201108523211893066978845349234900329165795636667677676886685475464902400448029...",
+  },
+  {
+    q: "Schreiben Sie in JavaScript eine Funktion topsort(), die eine topologische Sortierung berechnet. Topologische Sortierung ist eine Form von Sortierung. Sie kennen die Funktion Array.prototype.sort() und wissen, was als Ergebnis erwartet wird, nämlich eine sortierte Liste. Genauso ist das hier. Die Funktion topsort() soll eine sortierte Liste ausgeben, die keine der eingegebenen Abhängigkeiten verletzt.",
+    a: `
 function sortTasks(tasks) {
   let taskGraph = new Map();
   let incomingEdges = new Map();
@@ -898,16 +894,14 @@ function sortTasks(tasks) {
 
 console.assert(sortTasks([["schlafen","studieren"],["essen","studieren"],["studieren","prüfen"]]).toString() === ['schlafen', 'essen', 'studieren', 'prüfen'].toString());
     `,
-    },
-  ]
-)
-kwArr.push(kw45)
+  },
+]);
+kwArr.push(kw45);
 
-const kw46 = parseAsKW("KW 46",
-  [
-    {
-      q: "Implementieren Sie Performanz-Messungen zum Vergleich von innerHTML, innerText, textContent und outerHTML selbstständig in JavaScript durch Nutzung der DOM-API. Geben Sie die Messergebnisse als Tabelle aus. Verwenden Sie die eingebauten Zeitmessung-Funktionen performance.now(), siehe auch When-milliseconds-are-not-enough-performance-now. Suchen Sie eine möglichst kurze und elegante Lösung. Dabei ist zu beachten, dass Browser, um potenzielle Sicherheitsbedrohungen wie Meltdown oder Spectre zu minimieren, den zurückgegebenen Wert normalerweise um einen bestimmten Betrag runden. Dies führt zu einer gewissen Ungenauigkeit. Beispielsweise rundet Firefox die zurückgegebene Zeit in Schritten von 1 Millisekunde. Diese Zwangsrundung kann man jedoch wiederum abschalten mittels der Firefox-Einstellung privacy.reduceTimerPrecision, siehe How to get microsecond timings in JavaScript since Spectre and Meltdown.",
-      a: `
+const kw46 = parseAsKW("KW 46", [
+  {
+    q: "Implementieren Sie Performanz-Messungen zum Vergleich von innerHTML, innerText, textContent und outerHTML selbstständig in JavaScript durch Nutzung der DOM-API. Geben Sie die Messergebnisse als Tabelle aus. Verwenden Sie die eingebauten Zeitmessung-Funktionen performance.now(), siehe auch When-milliseconds-are-not-enough-performance-now. Suchen Sie eine möglichst kurze und elegante Lösung. Dabei ist zu beachten, dass Browser, um potenzielle Sicherheitsbedrohungen wie Meltdown oder Spectre zu minimieren, den zurückgegebenen Wert normalerweise um einen bestimmten Betrag runden. Dies führt zu einer gewissen Ungenauigkeit. Beispielsweise rundet Firefox die zurückgegebene Zeit in Schritten von 1 Millisekunde. Diese Zwangsrundung kann man jedoch wiederum abschalten mittels der Firefox-Einstellung privacy.reduceTimerPrecision, siehe How to get microsecond timings in JavaScript since Spectre and Meltdown.",
+    a: `
   <script>
   const testElement = document.createElement('div');
   document.body.appendChild(testElement);
@@ -934,12 +928,12 @@ const kw46 = parseAsKW("KW 46",
   
   console.log(results);
   </script>
-    `
-    },
-    {
-      demo: "uebung5.html",
-      q: "Implementieren Sie die interaktive Anwendung \"Rednerliste mit Zeitmessung\" selbstständig in JavaScript durch Nutzung der DOM-API und der Timer-Funktionen. Neue Redner sollen auf Knopfdruck hinzugefügt werden können. Deren Uhr wird dann sofort automatisch gestartet und alle anderen Uhren angehalten. Bei jedem Redner soll die individuelle, gemessene Redezeit sekundengenau angezeigt werden. Für jeden Redner soll es einen eigenen Start-/Stopp-Button geben. Es soll immer nur eine Uhr laufen. Angezeigt werden sollen die bisherigen Summenzeiten aller Redebeiträge der betreffenden Person. Suchen Sie eine möglichst kurze und elegante Lösung. Achten Sie gleichzeitig auf gute Usability: z.B. wenn die Eingabe mit einem Return beendet wird, soll der Klick auf den Button nicht mehr erforderlich sein.",
-      a: `
+    `,
+  },
+  {
+    demo: "uebung5.html",
+    q: 'Implementieren Sie die interaktive Anwendung "Rednerliste mit Zeitmessung" selbstständig in JavaScript durch Nutzung der DOM-API und der Timer-Funktionen. Neue Redner sollen auf Knopfdruck hinzugefügt werden können. Deren Uhr wird dann sofort automatisch gestartet und alle anderen Uhren angehalten. Bei jedem Redner soll die individuelle, gemessene Redezeit sekundengenau angezeigt werden. Für jeden Redner soll es einen eigenen Start-/Stopp-Button geben. Es soll immer nur eine Uhr laufen. Angezeigt werden sollen die bisherigen Summenzeiten aller Redebeiträge der betreffenden Person. Suchen Sie eine möglichst kurze und elegante Lösung. Achten Sie gleichzeitig auf gute Usability: z.B. wenn die Eingabe mit einem Return beendet wird, soll der Klick auf den Button nicht mehr erforderlich sein.',
+    a: `
   <!DOCTYPE html>
     <head>
       <style>
@@ -1026,11 +1020,11 @@ const kw46 = parseAsKW("KW 46",
     </body>
   </html>
   
-  `
-    },
-    {
-      q: "Schreiben Sie eine Weboberfläche, in der man beliebige Beziehungen (Vorrang-Relationen) eingeben kann, für die dann die topologische Sortierung per Knopfdruck auf der Webseite ausgegeben wird. Für die Eingabe können Sie HTML5-Eingabefelder oder das HTML-Attribut contenteditable verwenden.",
-      a: `
+  `,
+  },
+  {
+    q: "Schreiben Sie eine Weboberfläche, in der man beliebige Beziehungen (Vorrang-Relationen) eingeben kann, für die dann die topologische Sortierung per Knopfdruck auf der Webseite ausgegeben wird. Für die Eingabe können Sie HTML5-Eingabefelder oder das HTML-Attribut contenteditable verwenden.",
+    a: `
   <!DOCTYPE html>
   <html>
     <body>
@@ -1091,18 +1085,15 @@ const kw46 = parseAsKW("KW 46",
       </script>
     </body>
   </html>
-  `
-    }
-  ]
-);
-kwArr.push(kw46)
+  `,
+  },
+]);
+kwArr.push(kw46);
 
-
-const kw47 = parseAsKW("KW 47",
-  [
-    {
-      q: "Schreiben Sie eine Webseite, in die man eine Zeichenkette mit beliebigen Buchstaben, Zahlen und Sonderzeichen eingeben kann, die beliebig geschachtelte Klammern [...], (...) und {...} enthält, sodass sofort geprüft wird, ob alle Klammerpaare korrekt geschachtelt sind. Das Eingabefeld der Zeichenkette soll rot gefärbt werden, wenn es ein Klammerpaar gibt, das falsch geschachtelt ist. Verwenden Sie für Ihre Tests die Funktion console.assert. Bonus: Verallgemeinern Sie Ihren Algorithmus, sodass man Klammerpaare als Parameter frei definieren kann. Es müssen also nicht [...], (...) und {...} sein, sondern es können auch andere Zeichen gewählt werden.",
-      a: `
+const kw47 = parseAsKW("KW 47", [
+  {
+    q: "Schreiben Sie eine Webseite, in die man eine Zeichenkette mit beliebigen Buchstaben, Zahlen und Sonderzeichen eingeben kann, die beliebig geschachtelte Klammern [...], (...) und {...} enthält, sodass sofort geprüft wird, ob alle Klammerpaare korrekt geschachtelt sind. Das Eingabefeld der Zeichenkette soll rot gefärbt werden, wenn es ein Klammerpaar gibt, das falsch geschachtelt ist. Verwenden Sie für Ihre Tests die Funktion console.assert. Bonus: Verallgemeinern Sie Ihren Algorithmus, sodass man Klammerpaare als Parameter frei definieren kann. Es müssen also nicht [...], (...) und {...} sein, sondern es können auch andere Zeichen gewählt werden.",
+    a: `
   <!DOCTYPE html>
   
   <html>
@@ -1155,11 +1146,11 @@ const kw47 = parseAsKW("KW 47",
       console.assert(!areBracketsBalanced("([{]})"), "fehlgeschlagen");
     </script>
   </html>
-    `
-    },
-    {
-      q: 'Schreiben Sie eine ES6-Klasse Vorrang für Vorrangrelationen, z.B.: const studentenLeben = new Vorrang( [[ "schlafen", "studieren" ], [ "essen", "studieren" ], [ "studieren", "prüfen" ] ] ) Wählen Sie eine Implementierung, die universell gültig, also nicht nur für dieses Beispiel gilt. (Überlegen Sie sich, über welche Properties und Methoden eine solche Klasse verfügen sollte und wie TopSort hier hineinspielt. Topologische Iterierbarkeit und topologischer Generator sind Gegenstand der nächsten Übungen weiter unten auf diesem Übungsblatt und sollten für die folgenden Aufgaben aufgespart werden.) Stellen Sie bei Ihrer Klasse die topologische Iterierbarkeit her (zunächst über das Iterationsprotokoll, ohne Generator, ohne yield). Zum Beispiel soll dadurch folgende for ... of loop möglich werden, mit der die Elemente in topologischer Sortierung durchlaufen werden: for ( const next of studentenLeben ) {console.log( next );} Auf der Entwicklerkonsole wird dadurch ausgegeben: schlafen essen studieren prüfen Eine topologische Sortierung im Konstruktor vorauszuberechnen, wäre eine triviale Lösung. Versuchen Sie es stattdessen mit "lazy computation", d.h. erst beim Aufruf von next() wird die erforderliche Berechnung durchgeführt. Achten Sie auf einen minimalen Aufwand, d.h. bei jedem next() soll nicht alles erneut sortiert werden. Verwenden Sie so weit wie möglich High-Level-Methoden wie Object.keys und High-Level-Datenstrukturen wie Map und Set und deren Methoden, anstatt mühsam von Hand zu iterieren und zu zählen. Verwenden Sie für Ihre Tests console.assert. Betten Sie Ihren ECMAScript-Code in eine Webseite ein, so dass man die Vorrangrelation dort eingeben kann.',
-      a: `
+    `,
+  },
+  {
+    q: 'Schreiben Sie eine ES6-Klasse Vorrang für Vorrangrelationen, z.B.: const studentenLeben = new Vorrang( [[ "schlafen", "studieren" ], [ "essen", "studieren" ], [ "studieren", "prüfen" ] ] ) Wählen Sie eine Implementierung, die universell gültig, also nicht nur für dieses Beispiel gilt. (Überlegen Sie sich, über welche Properties und Methoden eine solche Klasse verfügen sollte und wie TopSort hier hineinspielt. Topologische Iterierbarkeit und topologischer Generator sind Gegenstand der nächsten Übungen weiter unten auf diesem Übungsblatt und sollten für die folgenden Aufgaben aufgespart werden.) Stellen Sie bei Ihrer Klasse die topologische Iterierbarkeit her (zunächst über das Iterationsprotokoll, ohne Generator, ohne yield). Zum Beispiel soll dadurch folgende for ... of loop möglich werden, mit der die Elemente in topologischer Sortierung durchlaufen werden: for ( const next of studentenLeben ) {console.log( next );} Auf der Entwicklerkonsole wird dadurch ausgegeben: schlafen essen studieren prüfen Eine topologische Sortierung im Konstruktor vorauszuberechnen, wäre eine triviale Lösung. Versuchen Sie es stattdessen mit "lazy computation", d.h. erst beim Aufruf von next() wird die erforderliche Berechnung durchgeführt. Achten Sie auf einen minimalen Aufwand, d.h. bei jedem next() soll nicht alles erneut sortiert werden. Verwenden Sie so weit wie möglich High-Level-Methoden wie Object.keys und High-Level-Datenstrukturen wie Map und Set und deren Methoden, anstatt mühsam von Hand zu iterieren und zu zählen. Verwenden Sie für Ihre Tests console.assert. Betten Sie Ihren ECMAScript-Code in eine Webseite ein, so dass man die Vorrangrelation dort eingeben kann.',
+    a: `
   <!DOCTYPE html>
   <html>
     <head> </head>
@@ -1255,10 +1246,10 @@ const kw47 = parseAsKW("KW 47",
   </html>
   
   `,
-    },
-    {
-      q: "Stellen Sie bei Ihrer Klasse aus der letzten Aufgabe die topologische Iterierbarkeit mittels Generator her. Wählen Sie eine Implementierung, die universell gültig, also nicht nur für das Beispiel gilt. Verwenden Sie für Ihre Tests console.assert.",
-      a: `
+  },
+  {
+    q: "Stellen Sie bei Ihrer Klasse aus der letzten Aufgabe die topologische Iterierbarkeit mittels Generator her. Wählen Sie eine Implementierung, die universell gültig, also nicht nur für das Beispiel gilt. Verwenden Sie für Ihre Tests console.assert.",
+    a: `
   class Vorrang {
       constructor(vorrangRelationen) {
           this.adjList = new Map();
@@ -1305,11 +1296,11 @@ const kw47 = parseAsKW("KW 47",
       arr.toString() === ["schlafen", "essen", "studieren", "prüfen"].toString()
   );
   
-    `
-    },
-    {
-      q: "Erweitern Sie Ihre Vorrang-Klasse um Logging, indem Sie ein Proxy einfügen. Lassen Sie sich vom Logger bei jedem Schritt ausgeben, wie viele der Vorrangrelationen noch übrig bleiben. Verwenden Sie wieder so weit wie möglich Object.keys, Map und Set und für Ihre Tests console.assert.",
-      a: `
+    `,
+  },
+  {
+    q: "Erweitern Sie Ihre Vorrang-Klasse um Logging, indem Sie ein Proxy einfügen. Lassen Sie sich vom Logger bei jedem Schritt ausgeben, wie viele der Vorrangrelationen noch übrig bleiben. Verwenden Sie wieder so weit wie möglich Object.keys, Map und Set und für Ihre Tests console.assert.",
+    a: `
   class Vorrang {
       constructor(vorrangRelationen) {
           this.adjList = new Map();
@@ -1380,11 +1371,11 @@ const kw47 = parseAsKW("KW 47",
   console.assert(
       arr.toString() === ["schlafen", "essen", "studieren", "prüfen"].toString()
   );
-    `
-    },
-    {
-      q: "Schreiben Sie eine rekursive Funktion deepCopy( struct ) als ES6-Ausdruck, sodass beliebig geschachtelte Arrays und Objekte tiefenkopiert werden können. Verwenden Sie zu diesem Zweck: konditionalen ternären Operator Array.map() Object.fromEntries() Object.entries() Verwenden Sie dabei nur Arrow-Funktionen und Ausdrücke, keine Anweisungen, keine Blöcke und keine JSON-Methoden. Nutzen Sie für Ihre Tests console.assert.",
-      a: `
+    `,
+  },
+  {
+    q: "Schreiben Sie eine rekursive Funktion deepCopy( struct ) als ES6-Ausdruck, sodass beliebig geschachtelte Arrays und Objekte tiefenkopiert werden können. Verwenden Sie zu diesem Zweck: konditionalen ternären Operator Array.map() Object.fromEntries() Object.entries() Verwenden Sie dabei nur Arrow-Funktionen und Ausdrücke, keine Anweisungen, keine Blöcke und keine JSON-Methoden. Nutzen Sie für Ihre Tests console.assert.",
+    a: `
   const isObject = obj => obj && typeof obj === 'object';
   
   const deepCopy = struct =>
@@ -1404,17 +1395,15 @@ const kw47 = parseAsKW("KW 47",
   
   console.assert(copy !== original);
   console.assert(copy.b !== original.b);
-  `
-    }
-  ]
-)
-kwArr.push(kw47)
+  `,
+  },
+]);
+kwArr.push(kw47);
 
 const kw48 = parseAsKW("KW 48", [
   {
     q: `Schreiben Sie eine Funktion curry (von Currying), die eine binäre Funktion und ein Argument nimmt, um daraus eine Funktion zu erzeugen, die ein zweites Argument entgegennimmt. Beispiele: add3 = curry(add, 3); add3(4) ergibt 7 und curry(mul, 5)(6) ergibt 30. Erzeugen Sie die inc-Funktion mithilfe von addf oder applyf (aus Aufgabe 4.1) und curry, ohne die Funktion inc selbst zu implementieren. inc(x) soll immer x + 1 zurückgeben und lässt sich natürlich auch direkt implementieren. Das ist aber hier nicht die Aufgabe. Vielleicht schaffen Sie es, drei Varianten der inc-Implementierung zu schreiben? Schreiben Sie eine Funktion methodize, die eine binäre Funktion (z.B. add oder mul) in eine unäre Methode verwandelt. Nach Number.prototype.add = methodize(add) soll (3).add(4) genau 7 ergeben. Schreiben Sie eine Funktion demethodize, die eine unäre Methode (z.B. add oder mul) in eine binäre Funktion umwandelt. demethodize(Number.prototype.add)(5, 6) soll 11 ergeben. Schreiben Sie eine Funktion twice, die eine binäre Funktion in eine unäre Funktion umwandelt, die den einen Parameter zweimal weiter reicht. Also z.B. var double = twice(add); double(11) soll 22 ergeben und var square = twice(mul); square(11) soll mul(11,11) === 121 ergeben. Schreiben Sie eine Funktion composeu, die zwei unäre Funktionen in eine einzelne unäre Funktion transformiert, die beide nacheinander aufruft. Also z.B. soll composeu(double, square)(3) genau 36 ergeben. Schreiben Sie eine Funktion composeb, die zwei binäre Funktionen in eine einzelne Funktion transformiert, die beide nacheinander aufruft. Also z.B. composeb(add, mul)(2, 3, 5) soll 25 ergeben. Schreiben Sie eine Funktion once, die einer anderen Funktion nur einmal erlaubt, aufgerufen zu werden. Also z.B. add_once = once(add); add_once(3, 4) soll beim ersten Mal 7 ergeben, beim zweiten Mal soll jedoch add_once(3, 4) einen Fehlerabbruch bewirken. Schreiben Sie eine Fabrik-Funktion counterf, die zwei Funktionen inc und dec berechnet, die einen Zähler hoch- und herunterzählen. Also z.B. counter = counterf(10). Dann soll counter.inc() genau 11 und counter.dec() wieder 10 ergeben. Schreiben Sie eine rücknehmbare Funktion revocable, die als Parameter eine Funktion nimmt und diese bei Aufruf ausführt. Sobald die Funktion aber mit revoke() zurückgenommen wurde, führt ein erneuter Aufruf zu einem Fehler. Also z.B.: temp = revocable(alert); temp.invoke(7); // führt zu alert(7); temp.revoke(); temp.invoke(8); // Fehlerabbruch! Schreiben Sie ein "Array Wrapper"-Objekt mit den Methoden get, store und append, sodass ein Angreifer keinen Zugriff auf das innere, private Array hat. Also z.B.: my_vector = vector(); my_vector.append(7); my_vector.store(1, 8); my_vector.get(0); // 7 my_vector.get(1); // 8`,
-    a:
-      `
+    a: `
   //Q1
   function curry(binaryFunc, firstArg) {
       return function (secondArg) {
@@ -1590,12 +1579,11 @@ const kw48 = parseAsKW("KW 48", [
   my_vector.store(1, 8);
   console.assert(my_vector.get(0) === 7);
   console.assert(my_vector.get(1) === 8);
-    `
+    `,
   },
   {
     q: "Schreiben Sie in JavaScript eine Textanalyse. Ermitteln Sie die häufigsten Begriffe im Text Plagiatsresolution. Filtern Sie dabei alle Stoppworte und HTML-Tags. Reduzieren Sie das Ergebnis auf die 3 häufigsten Begriffe. Hinweis: Eine größere Stoppwort-Liste finden Sie auch unter github.com/stopwords-iso/stopwords-de.",
-    a:
-      `
+    a: `
   const text = \`Plagiatsresolution und -maßnahmen Resolution zum akademischen Ethos und zu den akademischen Standards In guter Tradition und anlässlich der öffentlichen Diskussion zum Plagiatsthema sieht sich die Hochschule Bonn-Rhein-Sieg in der Pflicht, ihre Position klar und eindeutig zu bekunden und hochschulweit Maßnahmen einzuleiten. 1. Die Hochschule Bonn-Rhein-Sieg bekennt sich mit dieser Resolution öffentlich zum akademischen Ethos und den akademischen Standards. 2. Die Hochschule Bonn-Rhein-Sieg sieht sich verpflichtet, alle Studierende frühzeitig im Studium sowohl über den wissenschaftlichen Auftrag und den akademischen Ethos als auch über die Konsequenzen seiner Missachtung aufzuklären. In allen Studiengängen wird intensiv in die wissenschaftliche Arbeits- und Denkweise eingeführt und über den akademischen Ethos und die akademischen Standards klar und eindeutig aufgeklärt. 3. In einer Selbstverpflichtungserklärung zum akademischen Ethos geben alle Studierende der Hochschule Bonn-Rhein-Sieg spätestens gegen Ende des ersten Studienjahres zum Ausdruck, dass sie sich von den Dozentinnen und Dozenten der Hochschule Bonn-Rhein-Sieg hinreichend über den akademischen Ethos und die akademischen Standards aufgeklärt sind und diese beachten werden. Der Senat befürwortete in seiner Sitzung am 03.05.2012 die Resolution in der o.g. Fassung. Eckpunkte zur Plagiatsprüfung Der Senat empfiehlt: 1. Die Aufklärung und das Bekenntnis zum akademischen Ethos und den akademischen Standards muss fester Bestandteil aller Curricula aller Studiengänge im ersten Studienjahr sein. Alle Curricula aller Studiengänge werden darauf hin geprüft und ggfs. ergänzt. 2. Alle Abschlussarbeiten werden auf Plagiate geprüft. 3. Alle Abschlussarbeiten mit Plagiaten werden grundsätzlich als Fehlversuch gewertet. 4. Die Entscheidung, ob die Arbeit Plagiate enthält, liegt zuerst bei den Gutachterinnen und Gutachtern. Der Nachweis in einem Gutachten reicht. 5. Alle Abschlussarbeiten werden grundsätzlich auch in elektronischer Form (PDF-Format und Originalformat wie Word, OpenOffice, ...) eingereicht. 6. Alle Abschlussarbeiten ohne Sperrvermerk werden einem vom Fachbereich definierten Kreis zur Einsicht zur Verfügung gestellt. Alle Abschlussarbeiten sollten nach Möglichkeit grundsätzlich zur Veröffentlichung freigegeben werden. Wissenschaft zielt auf Veröffentlichung ab. Nichtveröffentlichung sollte nur in begründeten und durch den Prüfungsausschuss genehmigten Ausnahmefällen geschehen. 7. Im Bereich von Seminar-, Hausarbeiten und Praktikumsberichten behält sich die Hochschule stichprobenartige Plagiatsprüfungen vor. Selbstverpflichtungserklärung der Studierenden: Eine akademische Arbeit stellt eine individuelle Leistung dar, die eigenständig und allein auf Basis der im Literaturverzeichnis angegebenen Quellen erstellt wurde und in der alle Zitate als solche gekennzeichnet sind. "Ich erkläre hiermit, dass ich den akademischen Ehrencodex kenne und über die Folgen einer Missachtung oder Verletzung aufgeklärt worden bin."\`;
   const stop = ["a", "ab", "aber", "ach", "acht", "achte", "achten", "achter", "achtes", "ag", "alle", "allein", "allem", "allen", "aller", "allerdings", "alles", "allgemeinen", "als", "also", "am", "an", "ander", "andere", "anderem", "anderen", "anderer", "anderes", "anderm", "andern", "anderr", "anders", "au", "auch", "auf", "aus", "ausser", "ausserdem", "außer", "außerdem", "b", "bald", "bei", "beide", "beiden", "beim", "beispiel", "bekannt", "bereits", "besonders", "besser", "besten", "bin", "bis", "bisher", "bist", "c", "d", "d.h", "da", "dabei", "dadurch", "dafür", "dagegen", "daher", "dahin", "dahinter", "damals", "damit", "danach", "daneben", "dank", "dann", "daran", "darauf", "daraus", "darf", "darfst", "darin", "darum", "darunter", "darüber", "das", "dasein", "daselbst", "dass", "dasselbe", "davon", "davor", "dazu", "dazwischen", "daß", "dein", "deine", "deinem", "deinen", "deiner", "deines", "dem", "dementsprechend", "demgegenüber", "demgemäss", "demgemäß", "demselben", "demzufolge", "den", "denen", "denn", "denselben", "der", "deren", "derer", "derjenige", "derjenigen", "dermassen", "dermaßen", "derselbe", "derselben", "des", "deshalb", "desselben", "dessen", "deswegen", "dich", "die", "diejenige", "diejenigen", "dies", "diese", "dieselbe", "dieselben", "diesem", "diesen", "dieser", "dieses", "dir", "doch", "dort", "drei", "drin", "dritte", "dritten", "dritter", "drittes", "du", "durch", "durchaus", "durfte", "durften", "dürfen", "dürft", "e", "eben", "ebenso", "ehrlich", "ei", "ei,", "eigen", "eigene", "eigenen", "eigener", "eigenes", "ein", "einander", "eine", "einem", "einen", "einer", "eines", "einig", "einige", "einigem", "einigen", "einiger", "einiges", "einmal", "eins", "elf", "en", "ende", "endlich", "entweder", "er", "ernst", "erst", "erste", "ersten", "erster", "erstes", "es", "etwa", "etwas", "euch", "euer", "eure", "eurem", "euren", "eurer", "eures", "f", "folgende", "früher", "fünf", "fünfte", "fünften", "fünfter", "fünftes", "für", "g", "gab", "ganz", "ganze", "ganzen", "ganzer", "ganzes", "gar", "gedurft", "gegen", "gegenüber", "gehabt", "gehen", "geht", "gekannt", "gekonnt", "gemacht", "gemocht", "gemusst", "genug", "gerade", "gern", "gesagt", "geschweige", "gewesen", "gewollt", "geworden", "gibt", "ging", "gleich", "gott", "gross", "grosse", "grossen", "grosser", "grosses", "groß", "große", "großen", "großer", "großes", "gut", "gute", "guter", "gutes", "h", "hab", "habe", "haben", "habt", "hast", "hat", "hatte", "hatten", "hattest", "hattet", "heisst", "her", "heute", "hier", "hin", "hinter", "hoch", "hätte", "hätten", "i", "ich", "ihm", "ihn", "ihnen", "ihr", "ihre", "ihrem", "ihren", "ihrer", "ihres", "im", "immer", "in", "indem", "infolgedessen", "ins", "irgend", "ist", "j", "ja", "jahr", "jahre", "jahren", "je", "jede", "jedem", "jeden", "jeder", "jedermann", "jedermanns", "jedes", "jedoch", "jemand", "jemandem", "jemanden", "jene", "jenem", "jenen", "jener", "jenes", "jetzt", "k", "kam", "kann", "kannst", "kaum", "kein", "keine", "keinem", "keinen", "keiner", "keines", "kleine", "kleinen", "kleiner", "kleines", "kommen", "kommt", "konnte", "konnten", "kurz", "können", "könnt", "könnte", "l", "lang", "lange", "leicht", "leide", "lieber", "los", "m", "machen", "macht", "machte", "mag", "magst", "mahn", "mal", "man", "manche", "manchem", "manchen", "mancher", "manches", "mann", "mehr", "mein", "meine", "meinem", "meinen", "meiner", "meines", "mensch", "menschen", "mich", "mir", "mit", "mittel", "mochte", "mochten", "morgen", "muss", "musst", "musste", "mussten", "muß", "mußt", "möchte", "mögen", "möglich", "mögt", "müssen", "müsst", "müßt", "n", "na", "nach", "nachdem", "nahm", "natürlich", "neben", "nein", "neue", "neuen", "neun", "neunte", "neunten", "neunter", "neuntes", "nicht", "nichts", "nie", "niemand", "niemandem", "niemanden", "noch", "nun", "nur", "o", "ob", "oben", "oder", "offen", "oft", "ohne", "ordnung", "p", "q", "r", "recht", "rechte", "rechten", "rechter", "rechtes", "richtig", "rund", "s", "sa", "sache", "sagt", "sagte", "sah", "satt", "schlecht", "schluss", "schon", "sechs", "sechste", "sechsten", "sechster", "sechstes", "sehr", "sei", "seid", "seien", "sein", "seine", "seinem", "seinen", "seiner", "seines", "seit", "seitdem", "selbst", "sich", "sie", "sieben", "siebente", "siebenten", "siebenter", "siebentes", "sind", "so", "solang", "solche", "solchem", "solchen", "solcher", "solches", "soll", "sollen", "sollst", "sollt", "sollte", "sollten", "sondern", "sonst", "soweit", "sowie", "später", "startseite", "statt", "steht", "suche", "t", "tag", "tage", "tagen", "tat", "teil", "tel", "tritt", "trotzdem", "tun", "u", "uhr", "um", "und", "uns", "unse", "unsem", "unsen", "unser", "unsere", "unserer", "unses", "unter", "v", "vergangenen", "viel", "viele", "vielem", "vielen", "vielleicht", "vier", "vierte", "vierten", "vierter", "viertes", "vom", "von", "vor", "w", "wahr", "wann", "war", "waren", "warst", "wart", "warum", "was", "weg", "wegen", "weil", "weit", "weiter", "weitere", "weiteren", "weiteres", "welche", "welchem", "welchen", "welcher", "welches", "wem", "wen", "wenig", "wenige", "weniger", "weniges", "wenigstens", "wenn", "wer", "werde", "werden", "werdet", "weshalb", "wessen", "wie", "wieder", "wieso", "will", "willst", "wir", "wird", "wirklich", "wirst", "wissen", "wo", "woher", "wohin", "wohl", "wollen", "wollt", "wollte", "wollten", "worden", "wurde", "wurden", "während", "währenddem", "währenddessen", "wäre", "würde", "würden", "x", "y", "z", "z.b", "zehn", "zehnte", "zehnten", "zehnter", "zehntes", "zeit", "zu", "zuerst", "zugleich", "zum", "zunächst", "zur", "zurück", "zusammen", "zwanzig", "zwar", "zwei", "zweite", "zweiten", "zweiter", "zweites", "zwischen", "zwölf", "über", "überhaupt", "übrigens"];
   
@@ -1613,11 +1601,10 @@ const kw48 = parseAsKW("KW 48", [
           .slice(0, 3)
           .map(entry => entry[0])
   )
-    `
-  }
-])
-kwArr.push(kw48)
-
+    `,
+  },
+]);
+kwArr.push(kw48);
 
 const kw49 = parseAsKW("KW 49", [
   {
@@ -1660,7 +1647,7 @@ const kw49 = parseAsKW("KW 49", [
     </script>
   </body>
 </html>
-    `
+    `,
   },
   {
     q: `Lösen Sie die letzte Aufgabe mit async/await statt Promise.`,
@@ -1696,7 +1683,7 @@ const kw49 = parseAsKW("KW 49", [
     </script>
   </body>
 </html>
-`
+`,
   },
   {
     q: `Schreiben Sie einen Navigator für die Fachbegriffe des WWW zu den Oberthemen HTML, CSS und JavaScript. Im Hauptmenü sollen diese 3 Oberthemen zur Auswahl stehen. Im Untermenü soll eine zugehörige Liste von Fachbegriffen zum jeweiligen ausgewählten Oberthema stehen. In der Mitte soll eine Dokumentation zum ausgewählten Fachbegriff erscheinen. Schreiben Sie in HTML und CSS nur den responsiven Rahmen für einen solchen WWW-Navigator. Dabei können Sie auch ein schöneres Layout als das hier gezeigte erstellen. Die Inhalte sollen in einer JSON-Datei extern gelagert werden. Mit der fetch-API soll die JSON-Datei asynchron nicht-blockierend geladen werden, und zwar nur einmal, nicht mehrfach. (d.h. Sparen Sie Internet-Bandbreite.) Sobald die Inhalte angekommen sind, sollen sie im Browser auch sofort angezeigt werden. Fügen Sie selbst in die JSON-Datei zusätzliche Inhalte zu Themen der Vorlesung als Strings beispielhaft ein. Wenn Sie Inhalte aus fremden Quellen kopieren, so schreiben Sie bitte stets die Quelle als externe Ressource hinzu. Diese soll dann auf der rechten Seite im WWW-Navigator erscheinen.`,
@@ -1814,7 +1801,208 @@ const kw49 = parseAsKW("KW 49", [
 </html>
 
 `,
-    demo: "uebung9.html"
-  }
-])
-kwArr.push(kw49)
+    demo: "uebung9.html",
+  },
+]);
+kwArr.push(kw49);
+
+const kw50 = parseAsKW("KW 50", [
+  {
+    q: `Codieren Sie eine HTML-Datei mit Inline SVG, sodass sich folgendes Aussehen ergibt. Fügen Sie als Hover-Effekt eine CSS-Animation hinzu, die die Größe der SVG-Grafik verdoppelt, wenn man mit dem Cursor über die Grafik geht.`,
+    a: `
+<!DOCTYPE html>
+  <html >
+    <head>
+      <style>
+        svg:hover {
+          width: 400px;
+          height: 360px;
+          transition: 500ms;
+        }
+      </style>
+    </head>
+    <body>
+      <svg width="200" height="180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100%" height="100%" fill="#d76d77" />
+        <text x="30%" y="20%" dominant-baseline="middle" text-anchor="middle" font-size="48" fill="white">Use</text>
+        <line x1="10%" y1="35%" x2="90%" y2="35%" stroke="white" stroke-width="3"/>
+        <text x="30%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="48" fill="white">The</text>
+        <line x1="10%" y1="70%" x2="90%" y2="70%" stroke="white" stroke-width="3"/>
+        <text x="55%" y="90%" dominant-baseline="middle" text-anchor="middle" font-size="48" fill="white">Platform</text>
+      </svg>
+    </body>
+</html>`,
+  },
+  {
+    q: `Implementieren Sie ein eigenes Balkendiagramm mit HTML, Inline SVG, CSS und JavaScript. Geben Sie die Daten für das Balkendiagramm im JSON-Format vor. Nehmen Sie als Beispieldaten Marktdaten von der Bundesnetzagentur. Animieren Sie die Grafik (siehe z.B. Highchart Bar Chart).`,
+    a: `
+  <!DOCTYPE html>
+  <html >
+    <head>
+      <style>
+        .bar {
+          fill: steelblue;
+          transition: all 0.5s ease-out;
+        }
+      </style>
+      <script>
+        const data = [
+          {
+            date: "30.11.2023",
+            start: "00:00",
+            end: "01:00",
+            price: 104.79,
+          },
+          {
+            date: "30.11.2023",
+            start: "01:00",
+            end: "02:00",
+            price: 104.52,
+          },
+          {
+            date: "30.11.2023",
+            start: "02:00",
+            end: "03:00",
+            price: 102.2,
+          },
+          {
+            date: "30.11.2023",
+            start: "03:00",
+            end: "04:00",
+            price: 100.0,
+          },
+        ];
+  
+        window.onload = function () {
+          animateBars();
+        };
+  
+        function animateBars() {
+          const bars = document.querySelectorAll(".bar");
+          bars.forEach((bar, index) => {
+            bar.setAttribute("width", (data[index].price ))
+          });
+        }
+      </script>
+    </head>
+    <body>
+      <svg width="400" height="150">
+        <rect width="100%" height="100%" fill="white" />
+  
+        <rect class="bar" y="10" width="0" height="20" />
+        <rect class="bar" y="40" width="0" height="20" />
+        <rect class="bar" y="70" width="0" height="20" />
+        <rect class="bar" y="100" width="0" height="20" />
+      </svg>
+    </body>
+  </html>`,
+  },
+  {
+    q: `Implementieren Sie das Spiel Tic-Tac-Toe als HTML-Datei mit Inline SVG, CSS und JS.`,
+    demo: "uebung10.html",
+    a: `
+    <!DOCTYPE html>
+    <head>
+        <style>
+            #gameBoard {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+    
+            svg {
+                border: 1px solid black;
+            }
+    
+            .cell {
+                fill: white;
+                stroke: black;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="gameBoard">
+            <svg width="300" height="300" id="ticTacToeBoard">
+                <line x1="100" y1="0" x2="100" y2="300" stroke="#000" stroke-width="3"/>
+                <line x1="200" y1="0" x2="200" y2="300" stroke="#000" stroke-width="3"/>
+                <line x1="0" y1="100" x2="300" y2="100" stroke="#000" stroke-width="3"/>
+                <line x1="0" y1="200" x2="300" y2="200" stroke="#000" stroke-width="3"/>
+    
+                
+                <rect class="cell" x="0" y="0" width="100" height="100" data-cell-index="0"/>
+                <rect class="cell" x="100" y="0" width="100" height="100" data-cell-index="1"/>
+                <rect class="cell" x="200" y="0" width="100" height="100" data-cell-index="2"/>
+                <rect class="cell" x="0" y="100" width="100" height="100" data-cell-index="3"/>
+                <rect class="cell" x="100" y="100" width="100" height="100" data-cell-index="4"/>
+                <rect class="cell" x="200" y="100" width="100" height="100" data-cell-index="5"/>
+                <rect class="cell" x="0" y="200" width="100" height="100" data-cell-index="6"/>
+                <rect class="cell" x="100" y="200" width="100" height="100" data-cell-index="7"/>
+                <rect class="cell" x="200" y="200" width="100" height="100" data-cell-index="8"/>
+            </svg>
+        </div>
+        <script>
+            let currentPlayer = 'X';
+            let board = ['', '', '', '', '', '', '', '', ''];
+    
+            function drawSymbol(x, y, symbol) {
+                const ns = "http://www.w3.org/2000/svg";
+                let element;
+                if (symbol === 'X') {
+                    element = document.createElementNS(ns, 'text');
+                    element.setAttribute('x', x + 25);
+                    element.setAttribute('y', y + 75);
+                    element.textContent = 'X';
+                } else {
+                    element = document.createElementNS(ns, 'circle');
+                    element.setAttribute('cx', x + 50);
+                    element.setAttribute('cy', y + 50);
+                    element.setAttribute('r', 40);
+                    element.style.fill = 'none';
+                    element.style.stroke = 'black';
+                }
+                document.getElementById('ticTacToeBoard').appendChild(element);
+            }
+    
+            function cellClick(e) {
+                const cellIndex = e.target.getAttribute('data-cell-index');
+                if (board[cellIndex] !== '' || checkWinner()) return;
+    
+                board[cellIndex] = currentPlayer;
+                drawSymbol(e.target.x.baseVal.value, e.target.y.baseVal.value, currentPlayer);
+    
+                if (checkWinner()) {
+                    alert(\`\${currentPlayer} hat gewonnen!\`);
+                    return;
+                }
+    
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            }
+    
+            function checkWinner() {
+                const winConditions = [
+                    [0, 1, 2],
+                    [3, 4, 5],
+                    [6, 7, 8],
+                    [0, 3, 6],
+                    [1, 4, 7],
+                    [2, 5, 8],
+                    [0, 4, 8],
+                    [2, 4, 6]
+                ];
+                return winConditions.some(condition => {
+                    return condition.every(index => {
+                        return board[index] === currentPlayer;
+                    });
+                });
+            }
+    
+            document.querySelectorAll('.cell').forEach(cell => {
+                cell.addEventListener('click', cellClick);
+            });
+        </script>
+    </body>
+    </html>
+    `,
+  },
+]);
+kwArr.push(kw50);
