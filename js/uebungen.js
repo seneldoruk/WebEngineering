@@ -2006,3 +2006,86 @@ const kw50 = parseAsKW("KW 50", [
   },
 ]);
 kwArr.push(kw50);
+
+const kw51 = parseAsKW("KW 51", [{
+  q: `
+Gibt es in TypeScript statische Klassen? Erläutern Sie den Unterschied von TypeScript zu anderen objekt-orientierten, statisch typisierten Programmiersprachen wie Java und C#.
+  `,
+  a: `
+TypeScript unterstützt wie Java und C# die objektorientierte Programmierung und statische Typisierung. TypeScript ist im Wesentlichen eine Erweiterung von JavaScript, das um statische Typisierung erweitert wurde. Dies steht im Gegensatz zu Java und C#, die eigenständige Sprachen mit eigenen Laufzeitumgebungen sind. Das Typsystem von TypeScript  konzentriert sich auf die Form der Daten, im Gegensatz zu Java und C#, die ein nominales Typsystem auf der Grundlage expliziter Deklarationen verwenden. In TypeScript ist es nicht möglich, eine vollständig statische Klasse auf die gleiche Weise zu erstellen. Allerdings ist eine Klasse, in der alle Mitglieder statisch sind, möglich
+  `
+},
+{
+  q: `
+Gegeben sei folgendes fehlerbehaftete JavaScript-Programm. Ergänzen Sie dieses um möglichst viele Typisierungen und übersetzen Sie es in ein TypeScript-Programm.
+
+const add = (x,y) => x+y;
+const equals = (x,y) => x===y;
+console.log( add(1,2) );
+console.log( add(true, true ) );
+console.log( add(true, false ) );
+var x = y = 1;
+console.log( add(equals(x,y), equals(y,x)) );
+
+Was ist der Fehler im gegebenen JavaScript-Code? Welche Fehler meldet TypeScript? Geben Sie weitere Beispiele an, wie TypeScript bei der Fehlersuche helfen kann.
+  `,
+  a: `
+Keine Errors bei JS
+
+TS:
+const add = (x: number|boolean,y: number|boolean) => x+y;
+const equals = (x: number,y: number) => x===y;
+
+-Operator '+' cannot be applied to types 'number | boolean' and 'number | boolean'
+-Cannot find name 'y'.
+
+In js haben wir Ergebnisse erhalten, die wir wahrscheinlich nicht haben wollten, was zu logischen Fehlern führen kann, aber nicht zu Fehlern, da es keine Tests für diese gibt. In Typescript wurde ermittelt, welche Probleme sie verursachen könnten.`
+},
+{
+  q:
+    `
+Auf Deno ist TypeScript ohne Übersetzung direkt ablauffähig. Deno ist also die Runtime Engine für TypeScript.
+Implementieren Sie in TypeScript möglichst umfangreich statisch typisiert ein auf Deno ablauffähiges Programm server.ts, das mit deno run --allow-net server.ts gestartet werden kann und das die Marktdaten von der Bundesnetzagentur einliest, Minimum, Maximum, Durchschnitt und Summe berechnet und diese dann auf einer Webseite ausgibt.
+`,
+  a: `
+import { serve } from "https://deno.land/std/http/server.ts";
+
+async function fetchData(): Promise<number[]> {
+  const response = await fetch("https://www.smard.de/app/chart_data/4169/DE/4169_DE_hour_1700434800000.json");
+  const data = await response.json();
+  return data.series.map((item: [number, number]) => item[1]);
+}
+
+function calculateStats(numbers: number[]) {
+  const sum = numbers.reduce((a, b) => a + b, 0);
+  const min = Math.min(...numbers);
+  const max = Math.max(...numbers);
+  const avg = sum / numbers.length;
+
+  return { min, max, avg, sum };
+}
+
+async function handleRequest(req: Request): Promise<Response> {
+  const data = await fetchData();
+  const stats = calculateStats(data);
+
+  const body = \`
+    <h1>Statistik</h1>
+    <p>Minimum: \${stats.min}</p>
+    <p>Maximum: \${stats.max}</p>
+    <p>Durchschnitt: \${stats.avg}</p>
+    <p>Summe: \${stats.sum}</p>
+  \`;
+
+  return new Response(body, {
+    headers: { "content-type": "text/html" },
+  });
+}
+
+console.log("Server running on: http://localhost:8000");
+serve(handleRequest);
+
+  `
+}
+])
+kwArr.push(kw51)
