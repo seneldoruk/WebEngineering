@@ -40,6 +40,7 @@ class KalenderWoche {
                 demo.classList.add('demo')
                 demo.setAttribute('target', '_blank')
                 demo.setAttribute('href', `./demos/${item.demo}`)
+                demo.setAttribute("style", "transform: scale(0.8) translate(20%, -20%);");
 
                 var svgNS = "http://www.w3.org/2000/svg";
                 var svg = document.createElementNS(svgNS, "svg");
