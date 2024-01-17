@@ -2091,7 +2091,8 @@ serve(handleRequest);
 kwArr.push(kw51)
 
 spreadoperator = parseAsKW("Spread Operator", [
-  {q: `... Operator ermöglicht, ein iterierbares Objekt (wie ein Array) oder ein Objekt in einzelne Elemente oder Eigenschaften zu expandieren oder zu "verbreiten". Der Spread-Operator hat vielfältige Anwendungen
+  {
+    q: `... Operator ermöglicht, ein iterierbares Objekt (wie ein Array) oder ein Objekt in einzelne Elemente oder Eigenschaften zu expandieren oder zu "verbreiten". Der Spread-Operator hat vielfältige Anwendungen
   `, a: `
 const originalArray = [1, 2, 3];
 const copiedArray = [...originalArray];
