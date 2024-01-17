@@ -38,34 +38,17 @@ hr {
   display: flex;
   justify-content: center;
 }
-/* Quelle für .horizontal: https://www.w3schools.com/css/css_navbar_horizontal.asp (mit Anpassungen) */
 ul.horizontal {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   background-color: #03045e;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
+  grid-gap: 10px; 
 }
-
-@media (min-width: 480px) {
-  ul.horizontal {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    justify-content: start;
-  }
-}
-
-ul.horizontal li {
-  float: left;
-}
-
 ul.horizontal li a {
-  display: inline-block;
+  display: block; 
   color: white;
   text-align: center;
   padding: 14px 16px;
@@ -73,6 +56,24 @@ ul.horizontal li a {
   cursor: pointer;
   font-weight: bold;
 }
+
+@media (min-width: 480px) {
+  ul.horizontal {
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: center; 
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  ul.horizontal li a {
+    display: inline-block; 
+  }
+
+}
+
 
 ul.horizontal li a:hover:not(.active),
 ul.horizontal li a.active,
