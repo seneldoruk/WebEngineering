@@ -23,11 +23,13 @@
     <div class="container">
       <div id="entrypoint"></div>
     </div>
+    <div class="footer"></div>
   </body>
   <script src="js/classes.js"></script>
   <script src="js/uebungen.js"></script>
   <script>
     const navbar = document.querySelector(".horizontal");
+    //put uebungen to navbar
     kwArr.forEach((kw) => {
       const title = kw.title;
 
@@ -46,6 +48,16 @@
       navbar.appendChild(li);
     });
 
+    //open the first uebung
     navbar.children[0].firstChild.click();
+
+    //put random joke to footer
+    fetch("https://icanhazdadjoke.com/", {
+      headers: {
+        Accept: "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => document.querySelector(".footer").textContent = data.joke)
   </script>
 </html>

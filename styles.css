@@ -108,3 +108,7 @@ p.question {
   align-content: flex-start;
   align-items: center;
 }
+
+.footer{
+  text-align: center;
+}
