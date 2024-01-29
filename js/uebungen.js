@@ -1,7 +1,7 @@
 const kwArr = [];
 function parseAsKW(title, arr) {
   const qaObjects = arr.map(
-    (item) => new QuestionAndAnswer(item.q, item.a, item.demo)
+    (item) => new QuestionAndAnswer(item.q, item.a, item.demo),
   );
 
   return new KalenderWoche(title, qaObjects);
@@ -16,7 +16,7 @@ Was wäre der Preis für die garantierte Verhinderung von "broken links"?
 `,
     a: `
 1 - Die Community dachte, dass das Konzept von TBL ein Rückschritt wäre, besonders weil Broken Links möglich sind
-2 - unabhängig von Hardware oder Software zugänglich, frei verfügbar,  Unterstützung von Robert Cailliau 
+2 - unabhängig von Hardware oder Software zugänglich, frei verfügbar,  Unterstützung von Robert Cailliau
 3 - Für Referentielle Integrität muss man die Links von Seiten nicht andern dürfen
 `,
   },
@@ -31,7 +31,7 @@ In einer Webanwendung benötigen Sie eine OPTIONS-Anfrage, die die Optionen des 
     a: `
 200:  erfolgreich.
 301:  URL wurde dauerhaft verschoben.
-400:  ungültig oder falsch 
+400:  ungültig oder falsch
 403:  Zugriff nicht erlaubt
 Cache-Control header kann benutzt werden
 `,
@@ -905,9 +905,9 @@ const kw46 = parseAsKW("KW 46", [
   <script>
   const testElement = document.createElement('div');
   document.body.appendChild(testElement);
-  testElement.innerHTML = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'  
-  
-  
+  testElement.innerHTML = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+
+
   function measurePerformance(method) {
       const startTime = performance.now();
       var i = 0;
@@ -918,14 +918,14 @@ const kw46 = parseAsKW("KW 46", [
       const endTime = performance.now();
       return endTime - startTime;
   }
-  
+
   const results = {
       'innerHTML': measurePerformance('innerHTML'),
       'innerText': measurePerformance('innerText'),
       'textContent': measurePerformance('textContent'),
       'outerHTML': measurePerformance('outerHTML')
   };
-  
+
   console.log(results);
   </script>
     `,
@@ -954,30 +954,30 @@ const kw46 = parseAsKW("KW 46", [
     </head>
     <body>
       <h2>Rednerliste</h2>
-  
+
       <input type="text" id="rednerInput" placeholder="Neuer Redner" />
       <button id="addButton">Hinzufügen</button>
-  
+
       <ul id="rednerList"></ul>
-  
+
       <script>
         document.addEventListener("DOMContentLoaded", (event) => {
           let timers = {};
           let activeTimer = null;
-  
+
           const addSpeaker = (name) => {
             if (!name.trim()) return;
-  
+
             if (activeTimer) {
               clearInterval(timers[activeTimer].intervalId);
               activeTimer = null;
             }
-  
+
             const listItem = document.createElement("li");
             listItem.textContent = name + " 00:00:00";
             listItem.id = name;
             document.getElementById("speakersList").appendChild(listItem);
-  
+
             timers[name] = {
               time: 0,
               intervalId: setInterval(() => {
@@ -996,16 +996,16 @@ const kw46 = parseAsKW("KW 46", [
     }: \$\{ seconds.toString().padStart(2, "0") }\`;
               }, 1000),
             };
-  
+
             activeTimer = name;
           };
-  
+
           document.getElementById("addButton").addEventListener("click", () => {
             const speakerName = document.getElementById("speakerInput").value;
             addSpeaker(speakerName);
             document.getElementById("speakerInput").value = "";
           });
-  
+
           document
             .getElementById("speakerInput")
             .addEventListener("keypress", (e) => {
@@ -1019,7 +1019,7 @@ const kw46 = parseAsKW("KW 46", [
       </script>
     </body>
   </html>
-  
+
   `,
   },
   {
@@ -1039,31 +1039,31 @@ const kw46 = parseAsKW("KW 46", [
       <button onclick="getAndSortTasks()">Sortieren</button>
       <h2>Sortiert:</h2>
       <b id="output"></b>
-  
+
       <script>
         function sortTasks(tasks) {
           let taskGraph = new Map();
           let incomingEdges = new Map();
           let taskQueue = [];
           let sortedOrder = [];
-  
+
           tasks.forEach(([prerequisite, task]) => {
             if (!taskGraph.has(prerequisite)) taskGraph.set(prerequisite, []);
             if (!taskGraph.has(task)) taskGraph.set(task, []);
-  
+
             taskGraph.get(prerequisite).push(task);
             incomingEdges.set(task, (incomingEdges.get(task) || 0) + 1);
             incomingEdges.set(prerequisite, incomingEdges.get(prerequisite) || 0);
           });
-  
+
           for (let [task, edgesCount] of incomingEdges) {
             if (edgesCount === 0) taskQueue.push(task);
           }
-  
+
           while (taskQueue.length > 0) {
             let currentTask = taskQueue.shift();
             sortedOrder.push(currentTask);
-  
+
             taskGraph.get(currentTask).forEach((nextTask) => {
               incomingEdges.set(nextTask, incomingEdges.get(nextTask) - 1);
               if (incomingEdges.get(nextTask) === 0) {
@@ -1071,7 +1071,7 @@ const kw46 = parseAsKW("KW 46", [
               }
             });
           }
-  
+
           return sortedOrder;
         }
         function getAndSortTasks() {
@@ -1095,7 +1095,7 @@ const kw47 = parseAsKW("KW 47", [
     q: "Schreiben Sie eine Webseite, in die man eine Zeichenkette mit beliebigen Buchstaben, Zahlen und Sonderzeichen eingeben kann, die beliebig geschachtelte Klammern [...], (...) und {...} enthält, sodass sofort geprüft wird, ob alle Klammerpaare korrekt geschachtelt sind. Das Eingabefeld der Zeichenkette soll rot gefärbt werden, wenn es ein Klammerpaar gibt, das falsch geschachtelt ist. Verwenden Sie für Ihre Tests die Funktion console.assert. Bonus: Verallgemeinern Sie Ihren Algorithmus, sodass man Klammerpaare als Parameter frei definieren kann. Es müssen also nicht [...], (...) und {...} sein, sondern es können auch andere Zeichen gewählt werden.",
     a: `
   <!DOCTYPE html>
-  
+
   <html>
     <style>
       input.invalid {
@@ -1120,7 +1120,7 @@ const kw47 = parseAsKW("KW 47", [
           input.classList.add("invalid");
         }
       }
-  
+
       function areBracketsBalanced(str) {
         let stack = [];
         let map = {
@@ -1128,7 +1128,7 @@ const kw47 = parseAsKW("KW 47", [
           ")": "(",
           "}": "{",
         };
-  
+
         for (let ch of str) {
           if ("[{(".includes(ch)) {
             stack.push(ch);
@@ -1168,25 +1168,25 @@ const kw47 = parseAsKW("KW 47", [
         constructor(vorrangRelationen) {
           this.adjList = new Map();
           this.indegree = new Map();
-  
+
           vorrangRelationen.forEach(([u, v]) => {
             if (!this.adjList.has(u)) this.adjList.set(u, []);
             if (!this.adjList.has(v)) this.adjList.set(v, []);
             if (!this.indegree.has(u)) this.indegree.set(u, 0);
             if (!this.indegree.has(v)) this.indegree.set(v, 0);
-  
+
             this.adjList.get(u).push(v);
             this.indegree.set(v, this.indegree.get(v) + 1);
           });
-  
+
           this.queue = [];
           this.indegree.forEach((deg, node) => {
             if (deg === 0) this.queue.push(node);
           });
-  
+
           this.current = this.queue.shift();
         }
-  
+
         [Symbol.iterator]() {
           return {
             next: () => {
@@ -1194,14 +1194,14 @@ const kw47 = parseAsKW("KW 47", [
                 return { done: true };
               } else {
                 const result = { value: this.current, done: false };
-  
+
                 this.adjList.get(this.current).forEach((node) => {
                   this.indegree.set(node, this.indegree.get(node) - 1);
                   if (this.indegree.get(node) === 0) {
                     this.queue.push(node);
                   }
                 });
-  
+
                 this.current = this.queue.shift();
                 return result;
               }
@@ -1215,26 +1215,26 @@ const kw47 = parseAsKW("KW 47", [
           .split("\n")
           .map((line) => line.split(",").map((item) => item.trim()));
       }
-  
+
       function testVorrang() {
         const input = document.getElementById("inputArea").value;
         const vorrangRelationen = parseInput(input);
         const studentenLeben = new Vorrang(vorrangRelationen);
-  
+
         const ergebnisse = [];
         for (const next of studentenLeben) {
           ergebnisse.push(next);
         }
-  
+
         console.log("Sorted:", ergebnisse);
       }
-  
+
       const studentenLeben = new Vorrang([
         ["schlafen", "studieren"],
         ["essen", "studieren"],
         ["studieren", "prüfen"],
       ]);
-  
+
       var arr = [];
       for (const next of studentenLeben) {
         arr.push(next);
@@ -1244,7 +1244,7 @@ const kw47 = parseAsKW("KW 47", [
       );
     </script>
   </html>
-  
+
   `,
   },
   {
@@ -1254,25 +1254,25 @@ const kw47 = parseAsKW("KW 47", [
       constructor(vorrangRelationen) {
           this.adjList = new Map();
           this.indegree = new Map();
-  
+
           vorrangRelationen.forEach(([u, v]) => {
               if (!this.adjList.has(u)) this.adjList.set(u, []);
               if (!this.adjList.has(v)) this.adjList.set(v, []);
               if (!this.indegree.has(u)) this.indegree.set(u, 0);
               if (!this.indegree.has(v)) this.indegree.set(v, 0);
-  
+
               this.adjList.get(u).push(v);
               this.indegree.set(v, this.indegree.get(v) + 1);
           });
       }
-  
+
       *[Symbol.iterator]() {
           const queue = Array.from(this.indegree).filter(([node, deg]) => deg === 0).map(([node]) => node);
-  
+
           while (queue.length > 0) {
               const node = queue.shift();
               yield node;
-  
+
               this.adjList.get(node).forEach(adjNode => {
                   this.indegree.set(adjNode, this.indegree.get(adjNode) - 1);
                   if (this.indegree.get(adjNode) === 0) {
@@ -1282,7 +1282,7 @@ const kw47 = parseAsKW("KW 47", [
           }
       }
   }
-  
+
   const studentenLeben = new Vorrang([
       ["schlafen", "studieren"],
       ["essen", "studieren"],
@@ -1295,7 +1295,7 @@ const kw47 = parseAsKW("KW 47", [
   console.assert(
       arr.toString() === ["schlafen", "essen", "studieren", "prüfen"].toString()
   );
-  
+
     `,
   },
   {
@@ -1305,25 +1305,25 @@ const kw47 = parseAsKW("KW 47", [
       constructor(vorrangRelationen) {
           this.adjList = new Map();
           this.indegree = new Map();
-  
+
           vorrangRelationen.forEach(([u, v]) => {
               if (!this.adjList.has(u)) this.adjList.set(u, []);
               if (!this.adjList.has(v)) this.adjList.set(v, []);
               if (!this.indegree.has(u)) this.indegree.set(u, 0);
               if (!this.indegree.has(v)) this.indegree.set(v, 0);
-  
+
               this.adjList.get(u).push(v);
               this.indegree.set(v, this.indegree.get(v) + 1);
           });
       }
-  
+
       *[Symbol.iterator]() {
           const queue = Array.from(this.indegree).filter(([node, deg]) => deg === 0).map(([node]) => node);
-  
+
           while (queue.length > 0) {
               const node = queue.shift();
               yield node;
-  
+
               this.adjList.get(node).forEach(adjNode => {
                   this.indegree.set(adjNode, this.indegree.get(adjNode) - 1);
                   if (this.indegree.get(adjNode) === 0) {
@@ -1336,18 +1336,18 @@ const kw47 = parseAsKW("KW 47", [
   function createVorrangProxy(vorrangRelationen) {
       const vorrang = new Vorrang(vorrangRelationen);
       let verbleibendeRelationen = vorrangRelationen.length;
-  
+
       return new Proxy(vorrang, {
           get(target, prop, receiver) {
               if (typeof target[prop] === 'function' && prop === Symbol.iterator) {
                   return function* () {
                       const generator = target[prop].call(this);
-  
+
                       let result = generator.next();
                       while (!result.done) {
                           console.log(\`Bleibt: \${verbleibendeRelationen}\`);
                           yield result.value;
-  
+
                           verbleibendeRelationen--;
                           result = generator.next();
                       }
@@ -1357,8 +1357,8 @@ const kw47 = parseAsKW("KW 47", [
           }
       });
   }
-  
-  
+
+
   const studentenLeben = createVorrangProxy([
       ["schlafen", "studieren"],
       ["essen", "studieren"],
@@ -1377,22 +1377,22 @@ const kw47 = parseAsKW("KW 47", [
     q: "Schreiben Sie eine rekursive Funktion deepCopy( struct ) als ES6-Ausdruck, sodass beliebig geschachtelte Arrays und Objekte tiefenkopiert werden können. Verwenden Sie zu diesem Zweck: konditionalen ternären Operator Array.map() Object.fromEntries() Object.entries() Verwenden Sie dabei nur Arrow-Funktionen und Ausdrücke, keine Anweisungen, keine Blöcke und keine JSON-Methoden. Nutzen Sie für Ihre Tests console.assert.",
     a: `
   const isObject = obj => obj && typeof obj === 'object';
-  
+
   const deepCopy = struct =>
       Array.isArray(struct) ?
           struct.map(deepCopy) :
           isObject(struct) ?
               Object.fromEntries(Object.entries(struct).map(([k, v]) => [k, deepCopy(v)])) :
               struct;
-  
+
   const original = {
       a: 1,
       b: { c: 2, d: [3, 4, { e: 5 }] },
       f: [6, { g: 7 }]
   };
-  
+
   const copy = deepCopy(original);
-  
+
   console.assert(copy !== original);
   console.assert(copy.b !== original.b);
   `,
@@ -1413,91 +1413,91 @@ const kw48 = parseAsKW("KW 48", [
   var add = (x, y) => x + y;
   var mul = (x, y) => x * y;
   const add3 = curry(add, 3);
-  
+
   console.assert(add3(4), 7)
   console.assert(curry(mul, 5)(6), 30)
-  
+
   //Q2
   function addf(x) {
       return function (y) {
           return x + y;
       };
   }
-  
+
   // 1
   let inc = curry(addf(1), 1);
   console.assert(inc(1), 2)
-  
+
   // 2
   inc = addf(1);
   console.assert(inc(2), 3)
-  
+
   // 3
   inc = function (x) {
       return addf(x)(1);
   };
   console.assert(inc(3), 4)
-  
+
   //Q3
   function methodize(binaryFunc) {
       return function (y) {
           return binaryFunc(this, y);
       };
   }
-  
+
   Number.prototype.add = methodize(function (a, b) { return a + b; });
   console.assert((3).add(4) === 7);
-  
-  
+
+
   //Q4
   function demethodize(method) {
       return function (x, y) {
           return method.call(x, y);
       };
   }
-  
+
   Number.prototype.add = methodize(function (a, b) { return a + b; });
   const demethodizedAdd = demethodize(Number.prototype.add);
   console.assert(demethodizedAdd(5, 6) === 11);
-  
+
   //Q5
   function twice(binaryFunc) {
       return function (x) {
           return binaryFunc(x, x);
       };
   }
-  
+
   var double = twice(function (a, b) { return a + b; });
   console.assert(double(11) === 22);
-  
+
   var square = twice(function (a, b) { return a * b; });
   console.assert(square(11) === 121);
-  
-  
+
+
   //Q6
   function composeu(func1, func2) {
       return function (x) {
           return func2(func1(x));
       };
   }
-  
+
   double = function (x) { return x * 2; };
   square = function (x) { return x * x; };
   const doubleThenSquare = composeu(double, square);
   console.assert(doubleThenSquare(3) === 36);
-  
+
   //Q7
   function composeb(func1, func2) {
       return function (x, y, z) {
           return func2(func1(x, y), z);
       };
   }
-  
+
   add = function (a, b) { return a + b; };
   mul = function (a, b) { return a * b; };
   const addThenMul = composeb(add, mul);
   console.assert(addThenMul(2, 3, 5) === 25);
-  
+
   //Q8
   function once(func) {
       let executed = false;
@@ -1510,7 +1510,7 @@ const kw48 = parseAsKW("KW 48", [
           }
       };
   }
-  
+
   const addOnce = once(function (a, b) { return a + b; });
   console.assert(addOnce(3, 4) === 7);
   try {
@@ -1519,8 +1519,8 @@ const kw48 = parseAsKW("KW 48", [
   } catch (e) {
       console.assert(true);
   }
-  
-  
+
+
   //Q9
   function counterf(x) {
       return {
@@ -1528,11 +1528,11 @@ const kw48 = parseAsKW("KW 48", [
           dec: function () { return --x; }
       };
   }
-  
+
   const counter = counterf(10);
   console.assert(counter.inc() === 11, 'Counter inc failed');
   console.assert(counter.dec() === 10, 'Counter dec failed');
-  
+
   //Q10
   function revocable(func) {
       let revoked = false;
@@ -1549,7 +1549,7 @@ const kw48 = parseAsKW("KW 48", [
           }
       };
   }
-  
+
   function testAlert(message) {
       console.log("Alert called with message:", message);
       return message;
@@ -1563,7 +1563,7 @@ const kw48 = parseAsKW("KW 48", [
   } catch (e) {
       console.assert(true);
   }
-  
+
   //Q11
   function vector() {
       let array = [];
@@ -1573,7 +1573,7 @@ const kw48 = parseAsKW("KW 48", [
           append: function (v) { array.push(v); }
       };
   }
-  
+
   const my_vector = vector();
   my_vector.append(7);
   my_vector.store(1, 8);
@@ -1586,7 +1586,7 @@ const kw48 = parseAsKW("KW 48", [
     a: `
   const text = \`Plagiatsresolution und -maßnahmen Resolution zum akademischen Ethos und zu den akademischen Standards In guter Tradition und anlässlich der öffentlichen Diskussion zum Plagiatsthema sieht sich die Hochschule Bonn-Rhein-Sieg in der Pflicht, ihre Position klar und eindeutig zu bekunden und hochschulweit Maßnahmen einzuleiten. 1. Die Hochschule Bonn-Rhein-Sieg bekennt sich mit dieser Resolution öffentlich zum akademischen Ethos und den akademischen Standards. 2. Die Hochschule Bonn-Rhein-Sieg sieht sich verpflichtet, alle Studierende frühzeitig im Studium sowohl über den wissenschaftlichen Auftrag und den akademischen Ethos als auch über die Konsequenzen seiner Missachtung aufzuklären. In allen Studiengängen wird intensiv in die wissenschaftliche Arbeits- und Denkweise eingeführt und über den akademischen Ethos und die akademischen Standards klar und eindeutig aufgeklärt. 3. In einer Selbstverpflichtungserklärung zum akademischen Ethos geben alle Studierende der Hochschule Bonn-Rhein-Sieg spätestens gegen Ende des ersten Studienjahres zum Ausdruck, dass sie sich von den Dozentinnen und Dozenten der Hochschule Bonn-Rhein-Sieg hinreichend über den akademischen Ethos und die akademischen Standards aufgeklärt sind und diese beachten werden. Der Senat befürwortete in seiner Sitzung am 03.05.2012 die Resolution in der o.g. Fassung. Eckpunkte zur Plagiatsprüfung Der Senat empfiehlt: 1. Die Aufklärung und das Bekenntnis zum akademischen Ethos und den akademischen Standards muss fester Bestandteil aller Curricula aller Studiengänge im ersten Studienjahr sein. Alle Curricula aller Studiengänge werden darauf hin geprüft und ggfs. ergänzt. 2. Alle Abschlussarbeiten werden auf Plagiate geprüft. 3. Alle Abschlussarbeiten mit Plagiaten werden grundsätzlich als Fehlversuch gewertet. 4. Die Entscheidung, ob die Arbeit Plagiate enthält, liegt zuerst bei den Gutachterinnen und Gutachtern. Der Nachweis in einem Gutachten reicht. 5. Alle Abschlussarbeiten werden grundsätzlich auch in elektronischer Form (PDF-Format und Originalformat wie Word, OpenOffice, ...) eingereicht. 6. Alle Abschlussarbeiten ohne Sperrvermerk werden einem vom Fachbereich definierten Kreis zur Einsicht zur Verfügung gestellt. Alle Abschlussarbeiten sollten nach Möglichkeit grundsätzlich zur Veröffentlichung freigegeben werden. Wissenschaft zielt auf Veröffentlichung ab. Nichtveröffentlichung sollte nur in begründeten und durch den Prüfungsausschuss genehmigten Ausnahmefällen geschehen. 7. Im Bereich von Seminar-, Hausarbeiten und Praktikumsberichten behält sich die Hochschule stichprobenartige Plagiatsprüfungen vor. Selbstverpflichtungserklärung der Studierenden: Eine akademische Arbeit stellt eine individuelle Leistung dar, die eigenständig und allein auf Basis der im Literaturverzeichnis angegebenen Quellen erstellt wurde und in der alle Zitate als solche gekennzeichnet sind. "Ich erkläre hiermit, dass ich den akademischen Ehrencodex kenne und über die Folgen einer Missachtung oder Verletzung aufgeklärt worden bin."\`;
   const stop = ["a", "ab", "aber", "ach", "acht", "achte", "achten", "achter", "achtes", "ag", "alle", "allein", "allem", "allen", "aller", "allerdings", "alles", "allgemeinen", "als", "also", "am", "an", "ander", "andere", "anderem", "anderen", "anderer", "anderes", "anderm", "andern", "anderr", "anders", "au", "auch", "auf", "aus", "ausser", "ausserdem", "außer", "außerdem", "b", "bald", "bei", "beide", "beiden", "beim", "beispiel", "bekannt", "bereits", "besonders", "besser", "besten", "bin", "bis", "bisher", "bist", "c", "d", "d.h", "da", "dabei", "dadurch", "dafür", "dagegen", "daher", "dahin", "dahinter", "damals", "damit", "danach", "daneben", "dank", "dann", "daran", "darauf", "daraus", "darf", "darfst", "darin", "darum", "darunter", "darüber", "das", "dasein", "daselbst", "dass", "dasselbe", "davon", "davor", "dazu", "dazwischen", "daß", "dein", "deine", "deinem", "deinen", "deiner", "deines", "dem", "dementsprechend", "demgegenüber", "demgemäss", "demgemäß", "demselben", "demzufolge", "den", "denen", "denn", "denselben", "der", "deren", "derer", "derjenige", "derjenigen", "dermassen", "dermaßen", "derselbe", "derselben", "des", "deshalb", "desselben", "dessen", "deswegen", "dich", "die", "diejenige", "diejenigen", "dies", "diese", "dieselbe", "dieselben", "diesem", "diesen", "dieser", "dieses", "dir", "doch", "dort", "drei", "drin", "dritte", "dritten", "dritter", "drittes", "du", "durch", "durchaus", "durfte", "durften", "dürfen", "dürft", "e", "eben", "ebenso", "ehrlich", "ei", "ei,", "eigen", "eigene", "eigenen", "eigener", "eigenes", "ein", "einander", "eine", "einem", "einen", "einer", "eines", "einig", "einige", "einigem", "einigen", "einiger", "einiges", "einmal", "eins", "elf", "en", "ende", "endlich", "entweder", "er", "ernst", "erst", "erste", "ersten", "erster", "erstes", "es", "etwa", "etwas", "euch", "euer", "eure", "eurem", "euren", "eurer", "eures", "f", "folgende", "früher", "fünf", "fünfte", "fünften", "fünfter", "fünftes", "für", "g", "gab", "ganz", "ganze", "ganzen", "ganzer", "ganzes", "gar", "gedurft", "gegen", "gegenüber", "gehabt", "gehen", "geht", "gekannt", "gekonnt", "gemacht", "gemocht", "gemusst", "genug", "gerade", "gern", "gesagt", "geschweige", "gewesen", "gewollt", "geworden", "gibt", "ging", "gleich", "gott", "gross", "grosse", "grossen", "grosser", "grosses", "groß", "große", "großen", "großer", "großes", "gut", "gute", "guter", "gutes", "h", "hab", "habe", "haben", "habt", "hast", "hat", "hatte", "hatten", "hattest", "hattet", "heisst", "her", "heute", "hier", "hin", "hinter", "hoch", "hätte", "hätten", "i", "ich", "ihm", "ihn", "ihnen", "ihr", "ihre", "ihrem", "ihren", "ihrer", "ihres", "im", "immer", "in", "indem", "infolgedessen", "ins", "irgend", "ist", "j", "ja", "jahr", "jahre", "jahren", "je", "jede", "jedem", "jeden", "jeder", "jedermann", "jedermanns", "jedes", "jedoch", "jemand", "jemandem", "jemanden", "jene", "jenem", "jenen", "jener", "jenes", "jetzt", "k", "kam", "kann", "kannst", "kaum", "kein", "keine", "keinem", "keinen", "keiner", "keines", "kleine", "kleinen", "kleiner", "kleines", "kommen", "kommt", "konnte", "konnten", "kurz", "können", "könnt", "könnte", "l", "lang", "lange", "leicht", "leide", "lieber", "los", "m", "machen", "macht", "machte", "mag", "magst", "mahn", "mal", "man", "manche", "manchem", "manchen", "mancher", "manches", "mann", "mehr", "mein", "meine", "meinem", "meinen", "meiner", "meines", "mensch", "menschen", "mich", "mir", "mit", "mittel", "mochte", "mochten", "morgen", "muss", "musst", "musste", "mussten", "muß", "mußt", "möchte", "mögen", "möglich", "mögt", "müssen", "müsst", "müßt", "n", "na", "nach", "nachdem", "nahm", "natürlich", "neben", "nein", "neue", "neuen", "neun", "neunte", "neunten", "neunter", "neuntes", "nicht", "nichts", "nie", "niemand", "niemandem", "niemanden", "noch", "nun", "nur", "o", "ob", "oben", "oder", "offen", "oft", "ohne", "ordnung", "p", "q", "r", "recht", "rechte", "rechten", "rechter", "rechtes", "richtig", "rund", "s", "sa", "sache", "sagt", "sagte", "sah", "satt", "schlecht", "schluss", "schon", "sechs", "sechste", "sechsten", "sechster", "sechstes", "sehr", "sei", "seid", "seien", "sein", "seine", "seinem", "seinen", "seiner", "seines", "seit", "seitdem", "selbst", "sich", "sie", "sieben", "siebente", "siebenten", "siebenter", "siebentes", "sind", "so", "solang", "solche", "solchem", "solchen", "solcher", "solches", "soll", "sollen", "sollst", "sollt", "sollte", "sollten", "sondern", "sonst", "soweit", "sowie", "später", "startseite", "statt", "steht", "suche", "t", "tag", "tage", "tagen", "tat", "teil", "tel", "tritt", "trotzdem", "tun", "u", "uhr", "um", "und", "uns", "unse", "unsem", "unsen", "unser", "unsere", "unserer", "unses", "unter", "v", "vergangenen", "viel", "viele", "vielem", "vielen", "vielleicht", "vier", "vierte", "vierten", "vierter", "viertes", "vom", "von", "vor", "w", "wahr", "wann", "war", "waren", "warst", "wart", "warum", "was", "weg", "wegen", "weil", "weit", "weiter", "weitere", "weiteren", "weiteres", "welche", "welchem", "welchen", "welcher", "welches", "wem", "wen", "wenig", "wenige", "weniger", "weniges", "wenigstens", "wenn", "wer", "werde", "werden", "werdet", "weshalb", "wessen", "wie", "wieder", "wieso", "will", "willst", "wir", "wird", "wirklich", "wirst", "wissen", "wo", "woher", "wohin", "wohl", "wollen", "wollt", "wollte", "wollten", "worden", "wurde", "wurden", "während", "währenddem", "währenddessen", "wäre", "würde", "würden", "x", "y", "z", "z.b", "zehn", "zehnte", "zehnten", "zehnter", "zehntes", "zeit", "zu", "zuerst", "zugleich", "zum", "zunächst", "zur", "zurück", "zusammen", "zwanzig", "zwar", "zwei", "zweite", "zweiten", "zweiter", "zweites", "zwischen", "zwölf", "über", "überhaupt", "übrigens"];
-  
+
   const words = text.split(' ')
       .map(word => word.toLowerCase())
       .filter(word => word && !stop.includes(word) && word.length > 1)
@@ -1594,7 +1594,7 @@ const kw48 = parseAsKW("KW 48", [
           freq[word] = (freq[word] || 0) + 1;
           return freq;
       }, {});
-  
+
   console.log(
       Object.entries(words)
           .sort((a, b) => b[1] - a[1])
@@ -1872,11 +1872,11 @@ const kw50 = parseAsKW("KW 50", [
             price: 100.0,
           },
         ];
-  
+
         window.onload = function () {
           animateBars();
         };
-  
+
         function animateBars() {
           const bars = document.querySelectorAll(".bar");
           bars.forEach((bar, index) => {
@@ -1888,7 +1888,7 @@ const kw50 = parseAsKW("KW 50", [
     <body>
       <svg width="400" height="150">
         <rect width="100%" height="100%" fill="white" />
-  
+
         <rect class="bar" y="10" width="0" height="20" />
         <rect class="bar" y="40" width="0" height="20" />
         <rect class="bar" y="70" width="0" height="20" />
@@ -1909,11 +1909,11 @@ const kw50 = parseAsKW("KW 50", [
                 justify-content: center;
                 margin-top: 20px;
             }
-    
+
             svg {
                 border: 1px solid black;
             }
-    
+
             .cell {
                 fill: white;
                 stroke: black;
@@ -1927,8 +1927,8 @@ const kw50 = parseAsKW("KW 50", [
                 <line x1="200" y1="0" x2="200" y2="300" stroke="#000" stroke-width="3"/>
                 <line x1="0" y1="100" x2="300" y2="100" stroke="#000" stroke-width="3"/>
                 <line x1="0" y1="200" x2="300" y2="200" stroke="#000" stroke-width="3"/>
-    
-                
+
+
                 <rect class="cell" x="0" y="0" width="100" height="100" data-cell-index="0"/>
                 <rect class="cell" x="100" y="0" width="100" height="100" data-cell-index="1"/>
                 <rect class="cell" x="200" y="0" width="100" height="100" data-cell-index="2"/>
@@ -1943,7 +1943,7 @@ const kw50 = parseAsKW("KW 50", [
         <script>
             let currentPlayer = 'X';
             let board = ['', '', '', '', '', '', '', '', ''];
-    
+
             function drawSymbol(x, y, symbol) {
                 const ns = "http://www.w3.org/2000/svg";
                 let element;
@@ -1962,22 +1962,22 @@ const kw50 = parseAsKW("KW 50", [
                 }
                 document.getElementById('ticTacToeBoard').appendChild(element);
             }
-    
+
             function cellClick(e) {
                 const cellIndex = e.target.getAttribute('data-cell-index');
                 if (board[cellIndex] !== '' || checkWinner()) return;
-    
+
                 board[cellIndex] = currentPlayer;
                 drawSymbol(e.target.x.baseVal.value, e.target.y.baseVal.value, currentPlayer);
-    
+
                 if (checkWinner()) {
                     alert(\`\${currentPlayer} hat gewonnen!\`);
                     return;
                 }
-    
+
                 currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
             }
-    
+
             function checkWinner() {
                 const winConditions = [
                     [0, 1, 2],
@@ -1995,7 +1995,7 @@ const kw50 = parseAsKW("KW 50", [
                     });
                 });
             }
-    
+
             document.querySelectorAll('.cell').forEach(cell => {
                 cell.addEventListener('click', cellClick);
             });
@@ -2007,16 +2007,17 @@ const kw50 = parseAsKW("KW 50", [
 ]);
 kwArr.push(kw50);
 
-const kw51 = parseAsKW("KW 51", [{
-  q: `
+const kw51 = parseAsKW("KW 51", [
+  {
+    q: `
 Gibt es in TypeScript statische Klassen? Erläutern Sie den Unterschied von TypeScript zu anderen objekt-orientierten, statisch typisierten Programmiersprachen wie Java und C#.
   `,
-  a: `
+    a: `
 TypeScript unterstützt wie Java und C# die objektorientierte Programmierung und statische Typisierung. TypeScript ist im Wesentlichen eine Erweiterung von JavaScript, das um statische Typisierung erweitert wurde. Dies steht im Gegensatz zu Java und C#, die eigenständige Sprachen mit eigenen Laufzeitumgebungen sind. Das Typsystem von TypeScript  konzentriert sich auf die Form der Daten, im Gegensatz zu Java und C#, die ein nominales Typsystem auf der Grundlage expliziter Deklarationen verwenden. In TypeScript ist es nicht möglich, eine vollständig statische Klasse auf die gleiche Weise zu erstellen. Allerdings ist eine Klasse, in der alle Mitglieder statisch sind, möglich
-  `
-},
-{
-  q: `
+  `,
+  },
+  {
+    q: `
 Gegeben sei folgendes fehlerbehaftete JavaScript-Programm. Ergänzen Sie dieses um möglichst viele Typisierungen und übersetzen Sie es in ein TypeScript-Programm.
 
 const add = (x,y) => x+y;
@@ -2029,7 +2030,7 @@ console.log( add(equals(x,y), equals(y,x)) );
 
 Was ist der Fehler im gegebenen JavaScript-Code? Welche Fehler meldet TypeScript? Geben Sie weitere Beispiele an, wie TypeScript bei der Fehlersuche helfen kann.
   `,
-  a: `
+    a: `
 Keine Errors bei JS
 
 TS:
@@ -2039,15 +2040,14 @@ const equals = (x: number,y: number) => x===y;
 -Operator '+' cannot be applied to types 'number | boolean' and 'number | boolean'
 -Cannot find name 'y'.
 
-In js haben wir Ergebnisse erhalten, die wir wahrscheinlich nicht haben wollten, was zu logischen Fehlern führen kann, aber nicht zu Fehlern, da es keine Tests für diese gibt. In Typescript wurde ermittelt, welche Probleme sie verursachen könnten.`
-},
-{
-  q:
-    `
+In js haben wir Ergebnisse erhalten, die wir wahrscheinlich nicht haben wollten, was zu logischen Fehlern führen kann, aber nicht zu Fehlern, da es keine Tests für diese gibt. In Typescript wurde ermittelt, welche Probleme sie verursachen könnten.`,
+  },
+  {
+    q: `
 Auf Deno ist TypeScript ohne Übersetzung direkt ablauffähig. Deno ist also die Runtime Engine für TypeScript.
 Implementieren Sie in TypeScript möglichst umfangreich statisch typisiert ein auf Deno ablauffähiges Programm server.ts, das mit deno run --allow-net server.ts gestartet werden kann und das die Marktdaten von der Bundesnetzagentur einliest, Minimum, Maximum, Durchschnitt und Summe berechnet und diese dann auf einer Webseite ausgibt.
 `,
-  a: `
+    a: `
 import { serve } from "https://deno.land/std/http/server.ts";
 
 async function fetchData(): Promise<number[]> {
@@ -2085,15 +2085,78 @@ async function handleRequest(req: Request): Promise<Response> {
 console.log("Server running on: http://localhost:8000");
 serve(handleRequest);
 
-  `
-}
-])
-kwArr.push(kw51)
+  `,
+  },
+]);
+kwArr.push(kw51);
+
+const kw02 = parseAsKW("KW 02", [
+  {
+    q: `Erstellen Sie einen lokalen Webserver mit NodeJS. Reichen Sie als Lösung den JS-Code Ihrer server.js ein. Der Webserver soll über eine Schnittstelle verfügen, an die ein Client einen Namen senden kann und als Ergebnis dann mit einem Gruß antwortet. Beispiel: Der Client sendet "Mika" und der Server antwortet mit "Hallo Mika!"`,
+    a: `
+  const http = require('http');
+
+  const server = http.createServer((req, res) => {
+      if (req.method === 'POST' && req.url === '/greet') {
+          let body = '';
+
+          req.on('data', chunk => {
+              body += chunk.toString();
+          });
+
+          req.on('end', () => {
+              const name = JSON.parse(body).name;
+              res.end(\`Hallo \${name}!\`);
+          });
+      }
+  });
+
+  server.listen(3000, () => {
+      console.log("Server läuft auf Port 3000");
+  });
+
+  `,
+  },
+]);
+kwArr.push(kw02);
+
+const kw03 = parseAsKW("KW 03", [
+  {
+    q: `Erstellen Sie mit PHP ein Registrierungsformular. Speichern Sie die eingegebenen Daten persistent in einer Datei. Schreiben Sie Ihre PHP-Scripte so, dass es dabei zu keinen Nebenläufigkeitsartefakten (z.B. Lost Update) kommen kann, egal wie viele Nutzer sich gleichzeitig registrieren.`,
+    a: `
+  <?php
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $username = $_POST['username'];
+      $email = $_POST['email'];
+
+      $file = 'registrations.txt';
+
+      $fp = fopen($file, 'a');
+      if (flock($fp, LOCK_EX)) {
+          fwrite($fp, "$username, $email\n");
+          flock($fp, LOCK_UN);
+      }
+
+      fclose($fp);
+  }
+  ?>
+
+  <form action="register.php" method="post">
+      Username: <input type="text" name="username"><br>
+      E-Mail: <input type="text" name="email"><br>
+      <input type="submit" value="Registrieren">
+  </form>
+
+  `,
+  },
+]);
+kwArr.push(kw03);
 
 spreadoperator = parseAsKW("Spread Operator", [
   {
     q: `... Operator ermöglicht, ein iterierbares Objekt (wie ein Array) oder ein Objekt in einzelne Elemente oder Eigenschaften zu expandieren oder zu "verbreiten". Der Spread-Operator hat vielfältige Anwendungen
-  `, a: `
+  `,
+    a: `
 const originalArray = [1, 2, 3];
 const copiedArray = [...originalArray];
 console.log(copiedArray); // [1, 2, 3]
@@ -2107,7 +2170,8 @@ function captureArgs(...args) {
 }
 captureArgs(1, 2, 3); // Output: [1, 2, 3]
 
-  `}
-])
+  `,
+  },
+]);
 
-kwArr.push(spreadoperator)
+kwArr.push(spreadoperator);
